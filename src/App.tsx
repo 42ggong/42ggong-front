@@ -1,5 +1,9 @@
 import React from "react";
 import Main from "./pages/main/index";
+import Store from "./pages/store/index";
+import StatusAndLog from "./pages/statusAndLog/index";
+import MyList from "./pages/myList/index";
+import Discard from "./pages/discard/index";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 
@@ -18,6 +22,10 @@ function PrivateRouter() {
       <Routes>
         {/* <Route path="/" element={<PrivateLayout />}> */}
         <Route path="/" element={<Main />} />
+        <Route path="/store" element={<Store />} />
+        <Route path="/status" element={<StatusAndLog />} />
+        <Route path="/mylist" element={<MyList />} />
+        <Route path="/discard" element={<Discard />} />
         {/* <Route path="/*" element={<Error />} /> */}
       </Routes>
     </BrowserRouter>
