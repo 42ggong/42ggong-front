@@ -60,7 +60,7 @@ const DisCard = () => {
         </S.ButtonContainer>
         {showModal && (
           <Modal
-            onClose={onCloseModal}
+            handleClose={onCloseModal}
             handleSubmit={handleSubmit}
             text="안녕 난 모달"
           />

@@ -2,21 +2,21 @@ import React, { useState, useCallback } from "react";
 import * as S from "./style";
 
 interface Iprops {
-  onClose: () => void;
+  handleClose: () => void;
   handleSubmit: (e: any) => void;
   text: string;
 }
 
-const Modal = ({ onClose, handleSubmit, text }: Iprops) => {
-  console.log("Tet", handleSubmit, onClose);
+const Modal = ({ handleClose, handleSubmit, text }: Iprops) => {
+  console.log("Tet", handleSubmit, handleClose);
   return (
     <S.Test>
       <S.ModalContainer>
         <S.ModalTextContainer>{text}</S.ModalTextContainer>
         <S.ModalButtonContainer>
-          <button onClick={onClose}>취소</button>
+          <button onClick={handleClose}>취소</button>
           <button type="submit" onClick={handleSubmit}>
-            보관
+            완료
           </button>
         </S.ModalButtonContainer>
       </S.ModalContainer>
