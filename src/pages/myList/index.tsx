@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import * as S from "./style";
 // import { useNavigate } from "react-router-dom";
-import HomeButton from "../../componets/HomeButton/index";
-import ListBoxForm from "./componets/ListBoxForm/index";
+import HomeButton from "../../components/HomeButton/index";
+import ListBoxForm from "./components/ListBoxForm/index";
 
 const dummyList = [
   { uid: "123123", expday: "08-21", info: "사과" },

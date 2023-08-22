@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from "react";
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
-import Modal from "../../componets/Modal/index";
+import Modal from "../../components/Modal/index";
 import useInput from "../../utils/hooks/useInput";
-import HomeButton from "../../componets/HomeButton/index";
+import HomeButton from "../../components/HomeButton/index";
 
 const DisCard = () => {
   const navigate = useNavigate();

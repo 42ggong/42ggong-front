@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import * as S from "./style";
 // import { useNavigate } from "react-router-dom";
-import HomeButton from "../../componets/HomeButton/index";
-import Modal from "../../componets/Modal/index";
+import HomeButton from "../../components/HomeButton/index";
+import Modal from "../../components/Modal/index";
 
 const today = new Date().toISOString().slice(5, 10);
 

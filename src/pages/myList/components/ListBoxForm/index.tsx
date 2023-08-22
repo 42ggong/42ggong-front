@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as S from "../../style";
-import Modal from "../../../../componets/Modal/index";
+import Modal from "../../../../components/Modal/index";
 
 interface Iprops {
   dummyList: { uid: string; expday: string; info: string }[];
