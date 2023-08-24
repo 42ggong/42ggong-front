@@ -4,12 +4,12 @@ import * as S from "./style";
 import HomeButton from "../../components/HomeButton/index";
 import ListBoxForm from "./components/ListBoxForm/index";
 
-const dummyList = [
-  { uid: "123123", expday: "08-21", info: "사과" },
-  { uid: "123124", expday: "08-22", info: "배" },
-  { uid: "123125", expday: "08-23", info: "두리안" },
-  { uid: "123126", expday: "08-24", info: "오스트랄로피테쿠스" },
-];
+// const dummyList = [
+//   { uid: "123123", expday: "08-21", info: "사과" },
+//   { uid: "123124", expday: "08-22", info: "배" },
+//   { uid: "123125", expday: "08-23", info: "두리안" },
+//   { uid: "123126", expday: "08-24", info: "오스트랄로피테쿠스" },
+// ];
 const MyList = () => {
   // const navigate = useNavigate();
 
@@ -29,13 +29,13 @@ const MyList = () => {
   return (
     <>
       <HomeButton />
-      <S.InformContainer>안내메세지입니다 안내상</S.InformContainer>
+      <S.InformContainer>안내메세지입니다 내 리스트</S.InformContainer>
       <S.ListBoxContainer>
         <S.ListBoxBorder>
           <S.ListBoxButtonContainer>
             <div>나의 보관품</div>
           </S.ListBoxButtonContainer>
-          <ListBoxForm dummyList={dummyList} />
+          <ListBoxForm />
         </S.ListBoxBorder>
       </S.ListBoxContainer>
     </>

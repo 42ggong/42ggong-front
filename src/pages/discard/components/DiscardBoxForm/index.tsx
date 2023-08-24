@@ -11,7 +11,7 @@ let dummyList = [
 
 const today = new Date().toISOString().slice(5, 10);
 
-const ListBoxForm = () => {
+const DiscardBoxForm = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalText, setModalText] = useState("");
   const [allChecked, setAllChecked] = useState(false);
@@ -178,4 +178,4 @@ const ListBoxForm = () => {
   );
 };
 
-export default ListBoxForm;
+export default DiscardBoxForm;
