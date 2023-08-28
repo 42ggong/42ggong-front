@@ -1,15 +1,35 @@
 import styled from "@emotion/styled";
 
 export const RoutButtonContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  // margin-top: 10%;
-  // margin-left: 10%;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+  align-items: center;
+  justify-items: center;
+  margin-top: 50px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const RoutButton = styled.button`
-  width: 15%;
-  padding-bottom: 15%;
-  border: 1px solid;
+  padding: 30px 30px;
+  font-size: 18px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+
+  @media (max-width: 768px) {
+    margin: 10px 0;
+  }
 `;

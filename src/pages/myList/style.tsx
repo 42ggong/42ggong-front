@@ -4,7 +4,10 @@ import styled from "@emotion/styled";
 export const InformContainer = styled.div``;
 
 // list box
-export const ListBoxContainer = styled.div``;
+export const ListBoxContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
 export const ListBoxBorder = styled.div`
   border: 1px solid;
