@@ -6,6 +6,9 @@ import * as S from "./style";
 
 const Login = () => {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  document.cookie.split(" ");
+  console.log("cookie", document.cookie.split(" "));
+  setAccessToken(document.cookie);
   console.log("accessToken", accessToken);
   return (
     <S.LoginPageContainer>
