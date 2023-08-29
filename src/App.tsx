@@ -11,6 +11,7 @@ import MyList from "./pages/myList/index";
 import Discard from "./pages/discard/index";
 import Login from "./pages/login/index";
 import Error from "./pages/error/index";
+import Layout from "./layout/index";
 
 function App() {
   return (
@@ -24,15 +25,11 @@ const refreshToken = async (setAccessToken: any) => {
   // 엑세스가 없으면 리프레쉬 시도해보고 리프레쉬성공하면 set 하고 실패하면 null set하고 리프레쉬 토큰도 초기화해버리기
   // if (document.cookie)
   try {
-    await axios
-      .post("/refresh")
-      .then((re) => {
-        setAccessToken(re);
-      })
-      .catch(setAccessToken(""));
+    await axios.post("/refresh").then((re) => {
+      setAccessToken(re);
+    });
   } catch (e) {
-    setAccessToken("b");
-    // () => {};
+    //
   }
 };
 
@@ -49,12 +46,15 @@ function PrivateRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/store" element={<Store />} />
-        <Route path="/status" element={<StatusAndLog />} />
-        <Route path="/mylist" element={<MyList />} />
-        <Route path="/discard" element={<Discard />} />
-        <Route path="/*" element={<Error />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Main />} />
+          <Route path="/" element={<Main />} />
+          <Route path="/store" element={<Store />} />
+          <Route path="/status" element={<StatusAndLog />} />
+          <Route path="/mylist" element={<MyList />} />
+          <Route path="/discard" element={<Discard />} />
+          <Route path="/*" element={<Error />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

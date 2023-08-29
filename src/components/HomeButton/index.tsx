@@ -6,12 +6,11 @@ const HomeButton = () => {
   const navigate = useNavigate();
   return (
     <StyledHomeButton
+      src="/img/42ggongLogo.png"
       onClick={() => {
         navigate("/");
       }}
-    >
-      홈
-    </StyledHomeButton>
+    />
   );
 };
 

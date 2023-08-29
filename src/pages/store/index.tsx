@@ -3,7 +3,6 @@ import * as S from "./style";
 import { useNavigate } from "react-router-dom";
 import Modal from "../../components/Modal/index";
 import useInput from "../../utils/hooks/useInput";
-import HomeButton from "../../components/HomeButton/index";
 
 const DisCard = () => {
   const navigate = useNavigate();
@@ -28,8 +27,7 @@ const DisCard = () => {
   }, []);
 
   return (
-    <>
-      <HomeButton />
+    <S.StorePageContainer>
       <S.InformContainer>알립니다</S.InformContainer>
       <S.ItemInfoInputContainer>
         <label>보관품에 대한 간단한 설명을 입력해주세요!</label>
@@ -66,7 +64,7 @@ const DisCard = () => {
           />
         )}
       </form>
-    </>
+    </S.StorePageContainer>
   );
 };
 

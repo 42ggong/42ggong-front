@@ -1,32 +1,31 @@
 import styled from "@emotion/styled";
 
 export const RoutButtonContainer = styled.div`
-  display: grid;
-  grid-template-rows: repeat(2, 1fr);
-  grid-template-columns: repeat(2, 1fr);
-  gap: 5px;
-  align-items: center;
-  justify-items: center;
-  margin-top: 50px;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
+  width: 90px;
+  min-width: 200px;
+  height: 10%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
 `;
 
 export const RoutButton = styled.button`
   padding: 30px 30px;
   font-size: 18px;
-  background-color: #007bff;
+  background-color: #5947ff;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.3s;
   width: 100%;
-
+  height: 80px
+  padding: 20px;
+  margin: 10px auto;
   &:hover {
-    background-color: #0056b3;
+    background-color: #478eff;
   }
 
   @media (max-width: 768px) {

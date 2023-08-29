@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../utils/api/atom";
@@ -6,10 +6,15 @@ import * as S from "./style";
 
 const Login = () => {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
-  document.cookie.split(" ");
-  console.log("cookie", document.cookie.split(" "));
-  setAccessToken(document.cookie);
-  console.log("accessToken", accessToken);
+  useEffect(() => {
+    if (document.cookie.split("=")[0] === "accessToken") {
+      setAccessToken(document.cookie.split("=")[1]);
+      document.cookie =
+        "accessToken" + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      // TODO 어떤이용자가 쿠키에다가 accessToken 직접 넣는경우 생각
+    }
+  }, []);
+  // if (accessToken) return <>로딩중</>;
   return (
     <S.LoginPageContainer>
       <S.LoginContainer>
