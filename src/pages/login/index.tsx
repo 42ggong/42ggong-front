@@ -20,33 +20,28 @@ const Login = () => {
           <S.LoginButton
             onClick={async (e) => {
               e.preventDefault();
-              try {
-                await axios
-                  .get("/oauth2/authorization/ft")
-                  .then((result: any) => {
-                    console.log("re", result);
-                    // setAccessToken(JSON.stringify(result).accessToken);
-                    console.log("a");
-                  });
-              } catch (e) {
-                // setAccessToken("b");
-                alert("실패~!");
-                console.log("b");
-              }
+              window.location.href =
+                "http://localhost:8080/oauth2/authorization/ft";
+
+              //   try {
+              //     await axios
+              //       .get("/oauth2/authorization/ft")
+              //       .then((result: any) => {
+              //         console.log("re", result);
+              //         // setAccessToken(JSON.stringify(result).accessToken);
+              //         console.log("a");
+              //       });
+              //   } catch (e) {
+              //     // setAccessToken("b");
+              //     alert("실패~!");
+              //     console.log("b");
+              //   }
             }}
           >
             42 LOGIN
           </S.LoginButton>
           <S.Line />
         </S.LogoContainer>
-        {/* <button style={{ backgroundColor: "#5947ff", color: "white" }}>
-          {" "}
-          비교해봐요!!
-        </button>
-        <button style={{ backgroundColor: "#9147ff", color: "white" }}>
-          {" "}
-          비교해봐요!!
-        </button> */}
       </S.LoginContainer>
     </S.LoginPageContainer>
   );

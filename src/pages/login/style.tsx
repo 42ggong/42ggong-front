@@ -5,7 +5,7 @@ export const LoginPageContainer = styled.div`
 `;
 
 export const LoginContainer = styled.div`
-  height: 100%;
+  height: 90%;
   width: 100%;
   margin: 0 auto;
 
@@ -44,7 +44,7 @@ export const LogoContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
 
   width: 100%;
 `;
@@ -72,7 +72,7 @@ export const JoinUs = styled.span`
   position: fixed;
   background-color: white;
   padding: 10px 10px;
-
+  font-size: 1rem;
   line-height: 20px;
 `;
 

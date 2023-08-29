@@ -22,7 +22,7 @@ function App() {
 
 const refreshToken = async (setAccessToken: any) => {
   // 엑세스가 없으면 리프레쉬 시도해보고 리프레쉬성공하면 set 하고 실패하면 null set하고 리프레쉬 토큰도 초기화해버리기
-  if (document.cookie)
+  // if (document.cookie)
   try {
     await axios
       .post("/refresh")
@@ -31,7 +31,7 @@ const refreshToken = async (setAccessToken: any) => {
       })
       .catch(setAccessToken(""));
   } catch (e) {
-    setAccessToken("");
+    setAccessToken("b");
     // () => {};
   }
 };
@@ -54,6 +54,7 @@ function PrivateRouter() {
         <Route path="/status" element={<StatusAndLog />} />
         <Route path="/mylist" element={<MyList />} />
         <Route path="/discard" element={<Discard />} />
+        <Route path="/*" element={<Error />} />
       </Routes>
     </BrowserRouter>
   );
