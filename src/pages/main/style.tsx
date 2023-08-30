@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
 
 export const RoutButtonContainer = styled.div`
-  width: 90px;
+  // width: 90px;
   min-width: 200px;
-  height: 10%;
+  max-width: 50px;
+  height: calc(100% - 40px);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -21,7 +22,7 @@ export const RoutButton = styled.button`
   cursor: pointer;
   transition: background-color 0.3s;
   width: 100%;
-  height: 80px
+  height: 20%;
   padding: 20px;
   margin: 10px auto;
   &:hover {

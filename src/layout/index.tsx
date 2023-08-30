@@ -9,6 +9,7 @@ const Layout = () => {
       <S.LayoutContainer>
         <NavBar />
         <S.LayoutRect>
+          {/* <S.Lay outLine /> */}
           <Outlet />
         </S.LayoutRect>
       </S.LayoutContainer>

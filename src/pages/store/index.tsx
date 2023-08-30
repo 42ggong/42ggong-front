@@ -28,11 +28,27 @@ const DisCard = () => {
 
   return (
     <S.StorePageContainer>
-      <S.InformContainer>알립니다</S.InformContainer>
+      <S.InformContainer>
+        <S.InfromTitle>보관안내</S.InfromTitle>
+        <S.InfromTextContainer>
+          <S.InfromText>보관품에대한 간단한 설명 작성</S.InfromText>
+          <S.InfromText>42ggong을 이용하여 라벨생성</S.InfromText>
+          <S.InfromText>생성된 라벨을 보관품에 부착</S.InfromText>
+          <S.InfromText>라벨을 붙이지 않으면</S.InfromText>
+          <S.InfromText>언제든 폐기될수있어요!</S.InfromText>
+        </S.InfromTextContainer>
+      </S.InformContainer>
+      <S.Line />
       <S.ItemInfoInputContainer>
-        <label>보관품에 대한 간단한 설명을 입력해주세요!</label>
-        <input onChange={onBrieftInfo} />
+        <S.ItemInfoInputLabel>
+          보관품에대해 간단한 설명을 남겨보아요!
+        </S.ItemInfoInputLabel>
+        <S.ItemInfoInput onChange={onBrieftInfo} minLength={0} maxLength={8} />
+        <div
+          style={{ color: "gray", marginLeft: "65%" }}
+        >{`${briefInfo.length}/8`}</div>
       </S.ItemInfoInputContainer>
+      <S.Line />
       <form
         onSubmit={(e: any) => {
           e.preventDefault();
@@ -41,10 +57,10 @@ const DisCard = () => {
         }}
       >
         <S.ButtonContainer>
-          <button type={"reset"} onClick={handleCancle}>
+          <S.CancleButton type={"reset"} onClick={handleCancle}>
             취소
-          </button>
-          <button
+          </S.CancleButton>
+          <S.SubmitButton
             type="button"
             onClick={(e: any) => {
               e.preventDefault();
@@ -54,7 +70,7 @@ const DisCard = () => {
             tabIndex={-1}
           >
             보관
-          </button>
+          </S.SubmitButton>
         </S.ButtonContainer>
         {showModal && (
           <Modal

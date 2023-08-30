@@ -10,7 +10,7 @@ export const ModalContainer = styled.div`
   transform: translate(-50%, -50%);
 
   background-color: red;
-  border-radius: 5px;
+  border-radius: 20px;
 
   display: flex;
   flex-direction: column;
