@@ -35,11 +35,11 @@ const refreshToken = async (setAccessToken: any) => {
 
 function Routing() {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
-  useEffect(() => {
-    if (!accessToken) refreshToken(setAccessToken);
-  }, [accessToken]);
+  // useEffect(() => {
+  //   if (!accessToken) refreshToken(setAccessToken);
+  // }, [accessToken]);
   console.log("accessToken", accessToken);
-  return accessToken ? <PrivateRouter /> : <PrivateRouter />;
+  return accessToken ? <PrivateRouter /> : <PublicRouter />;
 }
 
 function PrivateRouter() {

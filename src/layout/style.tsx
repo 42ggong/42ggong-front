@@ -20,6 +20,9 @@ export const LayoutRect = styled.div`
   position: relative;
   height: calc(100% - 100px);
   width: calc(100% - 50px);
+  min-width: 320px;
+  min-height: 500px;
+  max-height: 750px;
   margin: 0 auto;
 `;
 

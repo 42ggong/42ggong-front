@@ -38,17 +38,16 @@ export const InfromText = styled.div`
 export const Line = styled.hr`
   width: 85%;
   max-width: 600px;
-
   border: 1.5px solid #478eff;
 `;
 
 export const ItemInfoInputContainer = styled.div`
-  display: flex;
   height: 150px;
   flex-direction: column;
   // border: solid;
-  width: 100%;
+  width: 85%;
   border-radius: 20px;
+  display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 10px auto;
@@ -56,6 +55,14 @@ export const ItemInfoInputContainer = styled.div`
 
 export const ItemInfoInputLabel = styled.label``;
 
+export const ItemInfoBox = styled.div`
+  height: 70px;
+  width: 75%;
+  border-radius: 10px;
+  font-size: 30px;
+  text-align: center;
+  border: 2px solid #5947ff;
+`;
 export const ItemInfoInput = styled.input`
   height: 70px;
   width: 75%;

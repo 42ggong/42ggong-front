@@ -27,18 +27,22 @@ const MyList = () => {
   //     </>
   //   );
   return (
-    <>
-      <HomeButton />
-      <S.InformContainer>안내메세지입니다 내 리스트</S.InformContainer>
+    <S.MyListPageContainer>
+      <S.InformContainer>
+        <h1>
+          나의 보관품
+          <br />
+          확인/찾기
+        </h1>
+        안내메세지입니다 내 리스트
+      </S.InformContainer>
       <S.ListBoxContainer>
-        <S.ListBoxBorder>
-          <S.ListBoxButtonContainer>
-            <div>나의 보관품</div>
-          </S.ListBoxButtonContainer>
-          <ListBoxForm />
-        </S.ListBoxBorder>
+        {/* <S.ListBoxBorder> */}
+        <S.ListBoxButtonContainer></S.ListBoxButtonContainer>
+        <ListBoxForm />
+        {/* </S.ListBoxBorder> */}
       </S.ListBoxContainer>
-    </>
+    </S.MyListPageContainer>
   );
 };
 
