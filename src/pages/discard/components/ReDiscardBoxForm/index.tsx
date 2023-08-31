@@ -51,59 +51,82 @@ const ReDiscardBoxForm = () => {
 
   return (
     <>
-      <form>
-        <input value={searchUid} tabIndex={-1} onChange={onSearchUid}></input>
-        <button type="submit" tabIndex={-1} onClick={handleSubmit}>
-          검색 후 추가
-        </button>
-      </form>
-      <>
-        <S.ListBoxForm>
-          <S.ListItemBorder style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}>
-            <S.ListItemColumn>식별자</S.ListItemColumn>
-            <S.ListItemColumn>유효기간</S.ListItemColumn>
-            <S.ListItemColumn>설명</S.ListItemColumn>
-            <S.ListItemColumn> </S.ListItemColumn>
-          </S.ListItemBorder>
-          {reDiscardArr.map((element: any, index: number) => {
-            return (
-              <S.ListItemBorder key={element.uid}>
-                <S.ListItemColumn>{element.uid}</S.ListItemColumn>
-                <S.ListItemColumn>{element.expday}</S.ListItemColumn>
-                <S.ListItemColumn>{element.info}</S.ListItemColumn>
-                <S.ListItemColumn>
-                  <button
-                    tabIndex={-1}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      const tmpArr = reDiscardArr.filter(
-                        (ele, idx) => idx !== index
-                      );
-                      setReDiscardArr(tmpArr);
-                    }}
-                  >
-                    x
-                  </button>
-                </S.ListItemColumn>
-              </S.ListItemBorder>
-            );
-          })}
-          <button
-            onClick={onReDiscard}
+      <S.ListBoxForm>
+        <S.ReDiscardListContainer>
+          <S.ListItemContainer style={{ backgroundColor: "#6c5cff" }}>
+            <S.ListItemCheckBoxContainer />
+            <S.ListItemColumn style={{ width: "60px" }}>
+              식별자
+            </S.ListItemColumn>
+            <S.ListItemColumn style={{ width: "60px" }}>
+              유효기간
+            </S.ListItemColumn>
+            <S.ListItemColumn style={{ width: "100px" }}>설명</S.ListItemColumn>
+            <S.ListItemColumn style={{ width: "55px" }}> </S.ListItemColumn>
+          </S.ListItemContainer>
+          <S.ReDiscardListRows>
+            {reDiscardArr.map((element: any, index: number) => {
+              return (
+                <S.ListItemContainer
+                  style={{ margin: "5px auto" }}
+                  key={element.uid}
+                >
+                  <S.ListItemCheckBoxContainer />
+                  <S.ListItemColumn style={{ width: "60px" }}>
+                    {element.uid}
+                  </S.ListItemColumn>
+                  <S.ListItemColumn style={{ width: "60px" }}>
+                    {element.expday}
+                  </S.ListItemColumn>
+                  <S.ListItemColumn style={{ width: "100px" }}>
+                    {element.info}
+                  </S.ListItemColumn>
+                  <S.ListItemColumn style={{ width: "55px" }}>
+                    <S.DiscardButton
+                      tabIndex={-1}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const tmpArr = reDiscardArr.filter(
+                          (ele, idx) => idx !== index
+                        );
+                        setReDiscardArr(tmpArr);
+                      }}
+                    >
+                      x
+                    </S.DiscardButton>
+                  </S.ListItemColumn>
+                </S.ListItemContainer>
+              );
+            })}
+          </S.ReDiscardListRows>
+        </S.ReDiscardListContainer>
+        <S.SearchContainer>
+          <S.SearchInput
+            value={searchUid}
             tabIndex={-1}
-            disabled={countRediscard() < 1}
-          >
-            전체 처리
-          </button>
-        </S.ListBoxForm>
-        {showModal && (
-          <Modal
-            handleClose={onCloseModal}
-            handleSubmit={onSubmit}
-            text={modalText}
+            onChange={onSearchUid}
+            minLength={0}
+            maxLength={6}
           />
-        )}
-      </>
+          <S.SearchButton type="submit" tabIndex={-1} onClick={handleSubmit}>
+            검색 후 추가
+          </S.SearchButton>
+        </S.SearchContainer>
+        <S.ListFormButton
+          onClick={onReDiscard}
+          tabIndex={-1}
+          disabled={countRediscard() < 1}
+        >
+          전체 처리
+        </S.ListFormButton>
+      </S.ListBoxForm>
+      {showModal && (
+        <Modal
+          handleClose={onCloseModal}
+          handleSubmit={onSubmit}
+          text={modalText}
+        />
+      )}
     </>
   );
 };

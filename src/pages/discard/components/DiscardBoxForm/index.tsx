@@ -3,10 +3,32 @@ import * as S from "../../style";
 import Modal from "../../../../components/Modal/index";
 
 let dummyList = [
-  { uid: "123123", expday: "08-21", info: "사과" },
+  { uid: "123123", expday: "10-21", info: "사과" },
   { uid: "123124", expday: "08-22", info: "배" },
   { uid: "123125", expday: "08-23", info: "두리안" },
-  { uid: "123126", expday: "08-24", info: "오스트랄로피테쿠스" },
+  { uid: "123126", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁" },
+  { uid: "123127", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁1" },
+  { uid: "123128", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁2" },
+  { uid: "123129", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁3" },
+  { uid: "123111", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁4" },
+  { uid: "123112", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁5" },
+  { uid: "123113", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁6" },
+  { uid: "123114", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁7" },
+  { uid: "123115", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁8" },
+  { uid: "123116", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁9" },
+  { uid: "123117", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁0" },
+  { uid: "123118", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁12" },
+  { uid: "123119", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁13" },
+  { uid: "123120", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁14" },
+  { uid: "123141", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁15" },
+  { uid: "123142", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁16" },
+  { uid: "123143", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁17" },
+  { uid: "123144", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁18" },
+  { uid: "123145", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁19" },
+  { uid: "123146", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁20" },
+  { uid: "123147", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁22" },
+  { uid: "123148", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁23" },
+  { uid: "123149", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁24" },
 ];
 
 const today = new Date().toISOString().slice(5, 10);
@@ -43,7 +65,7 @@ const DiscardBoxForm = () => {
   const generateButton = (listElement: any, index: any) => {
     if (listElement.expday > today)
       return (
-        <button
+        <S.PullButton
           onClick={(e) => {
             e.preventDefault();
             setModalText(
@@ -51,15 +73,16 @@ const DiscardBoxForm = () => {
 				반드시 냉장고에서
 				꺼낸 후에 완료해주세요!`
             );
+            setDeleteArrByIndex(index);
             setShowModal(true);
           }}
           tabIndex={-1}
         >
           찾기
-        </button>
+        </S.PullButton>
       );
     return (
-      <button
+      <S.DiscardButton
         onClick={(e) => {
           e.preventDefault();
           setModalText(
@@ -75,15 +98,11 @@ const DiscardBoxForm = () => {
         tabIndex={-1}
       >
         폐기
-      </button>
+      </S.DiscardButton>
     );
   };
   const countChecked = () => {
     return checkedArr.filter((element) => element === true).length;
-  };
-
-  const generateText = () => {
-    return;
   };
 
   const onSubmit = () => {
@@ -115,57 +134,82 @@ const DiscardBoxForm = () => {
   return (
     <>
       <S.ListBoxForm>
-        <S.ListItemBorder style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}>
-          <S.ListItemCheckBox
-            type="checkbox"
-            checked={allChecked}
-            tabIndex={-1}
-            onChange={() => {
-              if (checkedArr.indexOf(false) === -1) {
-                setAllChecked(false);
-                setCheckedArr(
-                  Array.from({ length: dummyList.length }, () => false)
-                );
-              } else {
-                setAllChecked(true);
-                setCheckedArr(
-                  Array.from({ length: dummyList.length }, () => true)
-                );
-              }
-            }}
-          />
-          <S.ListItemColumn>식별자</S.ListItemColumn>
-          <S.ListItemColumn>유효기간</S.ListItemColumn>
-          <S.ListItemColumn>설명</S.ListItemColumn>
-          <S.ListItemColumn> </S.ListItemColumn>
-        </S.ListItemBorder>
-        {dummyList.map((element: any, index: number) => {
-          return (
-            <S.ListItemBorder key={element.uid}>
+        <S.ListContainer>
+          <S.ListItemContainer style={{ backgroundColor: "#6c5cff" }}>
+            <S.ListItemCheckBoxContainer>
               <S.ListItemCheckBox
                 type="checkbox"
-                checked={checkedArr[index]}
+                checked={allChecked}
                 tabIndex={-1}
                 onChange={() => {
-                  setCheckedArrByIndex(index);
+                  if (checkedArr.indexOf(false) === -1) {
+                    setAllChecked(false);
+                    setCheckedArr(
+                      Array.from({ length: dummyList.length }, () => false)
+                    );
+                  } else {
+                    setAllChecked(true);
+                    setCheckedArr(
+                      Array.from({ length: dummyList.length }, () => true)
+                    );
+                  }
                 }}
               />
-              <S.ListItemColumn>{element.uid}</S.ListItemColumn>
-              <S.ListItemColumn>{element.expday}</S.ListItemColumn>
-              <S.ListItemColumn>{element.info}</S.ListItemColumn>
-              <S.ListItemColumn>
-                {generateButton(element, index)}
-              </S.ListItemColumn>
-            </S.ListItemBorder>
-          );
-        })}
-        <button
+            </S.ListItemCheckBoxContainer>
+            <S.ListItemColumn style={{ width: "60px" }}>
+              식별자
+            </S.ListItemColumn>
+            <S.ListItemColumn style={{ width: "60px" }}>
+              유효기간
+            </S.ListItemColumn>
+            <S.ListItemColumn style={{ width: "100px" }}>설명</S.ListItemColumn>
+            <S.ListItemColumn style={{ width: "55px" }}> </S.ListItemColumn>
+          </S.ListItemContainer>
+          {dummyList.length > 1 ? (
+            <S.ListRows>
+              {dummyList.map((element: any, index: number) => {
+                return (
+                  <S.ListItemContainer
+                    style={{ margin: "5px auto" }}
+                    key={element.uid}
+                  >
+                    <S.ListItemCheckBoxContainer>
+                      <S.ListItemCheckBox
+                        type="checkbox"
+                        checked={checkedArr[index]}
+                        tabIndex={-1}
+                        onChange={() => {
+                          setCheckedArrByIndex(index);
+                        }}
+                      />
+                    </S.ListItemCheckBoxContainer>
+                    <S.ListItemColumn style={{ width: "60px" }}>
+                      {element.uid}
+                    </S.ListItemColumn>
+                    <S.ListItemColumn style={{ width: "60px" }}>
+                      {element.expday}
+                    </S.ListItemColumn>
+                    <S.ListItemColumn style={{ width: "100px" }}>
+                      {element.info}
+                    </S.ListItemColumn>
+                    <S.ListItemColumn style={{ width: "55px" }}>
+                      {generateButton(element, index)}
+                    </S.ListItemColumn>
+                  </S.ListItemContainer>
+                );
+              })}
+            </S.ListRows>
+          ) : (
+            <h1>앗 아무고토 없어요!!</h1>
+          )}
+        </S.ListContainer>
+        <S.ListFormButton
           onClick={onMultiDiscard}
           disabled={countChecked() < 1}
           tabIndex={-1}
         >
           선택 처리
-        </button>
+        </S.ListFormButton>
       </S.ListBoxForm>
       {showModal && (
         <Modal

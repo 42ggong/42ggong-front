@@ -38,7 +38,7 @@ const MyList = () => {
       </S.InformContainer>
       <S.ListBoxContainer>
         {/* <S.ListBoxBorder> */}
-        <S.ListBoxButtonContainer></S.ListBoxButtonContainer>
+        {/* <S.ListBoxButtonContainer></S.ListBoxButtonContainer> */}
         <ListBoxForm />
         {/* </S.ListBoxBorder> */}
       </S.ListBoxContainer>

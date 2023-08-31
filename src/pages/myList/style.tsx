@@ -44,9 +44,9 @@ export const ListBoxContainer = styled.div`
 
 export const ListBoxButtonContainer = styled.div``;
 
-export const ListItemColumnTitle = styled.div`
-  border-radius: 15px;
-`;
+// export const ListItemColumnTitle = styled.div`
+//   border-radius: 15px;
+// `;
 
 export const ListBoxForm = styled.form`
   width: 100%;
@@ -60,11 +60,12 @@ export const ListBoxForm = styled.form`
 `;
 
 export const ListContainer = styled.div`
-  height: calc(100% - 110px);
+  height: calc(100% - 60px);
+  // overflow: auto;
 `;
 
 export const ListRows = styled.div`
-  height: 100%;
+  height: calc(100% - 60px);
   overflow: auto;
 `;
 

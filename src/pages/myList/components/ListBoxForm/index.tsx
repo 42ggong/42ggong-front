@@ -104,10 +104,6 @@ const ListBoxForm = () => {
     return checkedArr.filter((element) => element === true).length;
   };
 
-  const generateText = () => {
-    return;
-  };
-
   const onSubmit = () => {
     dummyList = dummyList.filter(
       (element: any, index: any) => deleteArr[index] === false
@@ -139,40 +135,37 @@ const ListBoxForm = () => {
     <>
       <S.ListBoxForm>
         <S.ListContainer>
-          <S.ListItemColumnTitle>
-            <S.ListItemContainer style={{ backgroundColor: "#6c5cff" }}>
-              <S.ListItemCheckBoxContainer>
-                <S.ListItemCheckBox
-                  type="checkbox"
-                  checked={allChecked}
-                  tabIndex={-1}
-                  onChange={() => {
-                    if (checkedArr.indexOf(false) === -1) {
-                      setAllChecked(false);
-                      setCheckedArr(
-                        Array.from({ length: dummyList.length }, () => false)
-                      );
-                    } else {
-                      setAllChecked(true);
-                      setCheckedArr(
-                        Array.from({ length: dummyList.length }, () => true)
-                      );
-                    }
-                  }}
-                />
-              </S.ListItemCheckBoxContainer>
-              <S.ListItemColumn style={{ width: "60px" }}>
-                식별자
-              </S.ListItemColumn>
-              <S.ListItemColumn style={{ width: "60px" }}>
-                유효기간
-              </S.ListItemColumn>
-              <S.ListItemColumn style={{ width: "100px" }}>
-                설명
-              </S.ListItemColumn>
-              <S.ListItemColumn style={{ width: "55px" }}> </S.ListItemColumn>
-            </S.ListItemContainer>
-          </S.ListItemColumnTitle>
+          {/* <S.ListItemColumnTitle> */}
+          <S.ListItemContainer style={{ backgroundColor: "#6c5cff" }}>
+            <S.ListItemCheckBoxContainer>
+              <S.ListItemCheckBox
+                type="checkbox"
+                checked={allChecked}
+                tabIndex={-1}
+                onChange={() => {
+                  if (checkedArr.indexOf(false) === -1) {
+                    setAllChecked(false);
+                    setCheckedArr(
+                      Array.from({ length: dummyList.length }, () => false)
+                    );
+                  } else {
+                    setAllChecked(true);
+                    setCheckedArr(
+                      Array.from({ length: dummyList.length }, () => true)
+                    );
+                  }
+                }}
+              />
+            </S.ListItemCheckBoxContainer>
+            <S.ListItemColumn style={{ width: "60px" }}>
+              식별자
+            </S.ListItemColumn>
+            <S.ListItemColumn style={{ width: "60px" }}>
+              유효기간
+            </S.ListItemColumn>
+            <S.ListItemColumn style={{ width: "100px" }}>설명</S.ListItemColumn>
+            <S.ListItemColumn style={{ width: "55px" }}> </S.ListItemColumn>
+          </S.ListItemContainer>
           {dummyList.length > 1 ? (
             <S.ListRows>
               {dummyList.map((element: any, index: number) => {

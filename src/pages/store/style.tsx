@@ -56,7 +56,7 @@ export const ItemInfoInputContainer = styled.div`
 export const ItemInfoInputLabel = styled.label``;
 
 export const ItemInfoBox = styled.div`
-  height: 70px;
+  height: 50px;
   width: 75%;
   border-radius: 10px;
   font-size: 30px;
@@ -66,7 +66,7 @@ export const ItemInfoBox = styled.div`
 export const ItemInfoInput = styled.input`
   height: 70px;
   width: 75%;
-  border-radius: 10px;
+  border-radius: 20px;
   font-size: 30px;
   text-align: center;
   border: 2px solid #5947ff;
