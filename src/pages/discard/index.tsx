@@ -11,7 +11,10 @@ const DisCard = () => {
     <S.DiscardPageContainer>
       <S.InformContainer>
         <h1>폐기하기</h1>
-        안내메세지입니다 내 리스트
+        <span>안내메세지입니다 내 리스트</span>
+        <span>안내메세지입니다 내 리스트</span>
+        <span>안내메세지입니다 내 리스트</span>
+        <span>안내메세지입니다 내 리스트</span>
       </S.InformContainer>
       <S.MenuButtonContainer>
         <S.MenuButton

@@ -17,8 +17,9 @@ export const InformContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 25%;
-  min-height: calc(30% - 35px);
+  height: 320px;
+  min-height: 160px;
+  // min-height: calc(30% - 35px);
   border-radius: 20px;
   align-items: center;
   justify-content: center;
@@ -26,8 +27,9 @@ export const InformContainer = styled.div`
 `;
 
 export const MenuButtonContainer = styled.div`
-  height: 5%;
-  max-height: 35px;
+  // height: 5%;
+  // max-height: 35px;
+  height: 35px;
 `;
 
 export const MenuButton = styled.button`
@@ -44,7 +46,8 @@ export const MenuButton = styled.button`
 export const ListBoxContainer = styled.div`
   // border: solid;
   display: flex;
-  height: 70%;
+  height: 600px;
+  min-height: 300px;
   flex-direction: column;
   // border: solid;
   width: 100%;
@@ -74,16 +77,20 @@ export const ListBoxForm = styled.form`
 `;
 
 export const ListContainer = styled.div`
-  height: calc(100% - 60px);
-  min-height: calc(100% - 60px);
-  max-height: calc(100% - 60px);
+  height: 540px;
+  min-height: 240px;
+  // height: calc(100% - 60px);
+  // min-height: calc(100% - 60px);
+  // max-height: calc(100% - 60px);
   // overflow: auto;
 `;
 
 export const ReDiscardListContainer = styled.div`
-  height: calc(100% - 110px);
-  min-height: calc(100% - 110px);
-  max-height: calc(100% - 110px);
+  height: 490px;
+  min-height: 190px;
+  // height: calc(100% - 110px);
+  // min-height: calc(100% - 110px);
+  // max-height: calc(100% - 110px);
   // overflow: auto;
 `;
 
@@ -94,7 +101,7 @@ export const ListRows = styled.div`
 `;
 
 export const ReDiscardListRows = styled.div`
-  height: calc(100% - 110px);
+  height: calc(100% - 60px);
   overflow: auto;
 `;
 
@@ -206,7 +213,7 @@ export const SearchContainer = styled.div`
 
 export const SearchInput = styled.input`
   width: 70%;
-  height: 50px;
+  height: 40px;
   border: none;
   border-radius: 20px;
   font-size: 30px;
@@ -216,7 +223,7 @@ export const SearchInput = styled.input`
 
 export const SearchButton = styled.button`
   width: 25%;
-  height: 50px;
+  height: 40px;
   border: none;
   // margin-left: 70%;
   border-radius: 20px;

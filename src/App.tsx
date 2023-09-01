@@ -39,7 +39,7 @@ function Routing() {
   //   if (!accessToken) refreshToken(setAccessToken);
   // }, [accessToken]);
   console.log("accessToken", accessToken);
-  return accessToken ? <PrivateRouter /> : <PublicRouter />;
+  return accessToken ? <PrivateRouter /> : <PrivateRouter />;
 }
 
 function PrivateRouter() {
