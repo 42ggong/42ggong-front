@@ -28,6 +28,7 @@ export const InformContainer = styled.div`
 `;
 //  overflow: auto; 임시로..
 
+// menuButton
 export const MenuButtonContainer = styled.div`
   // height: 5%;
   // max-height: 35px;
@@ -69,10 +70,8 @@ export const ListBoxContainer = styled.div`
 
 export const ListBoxForm = styled.form`
   width: 100%;
-  // padding: 10px 25px;
   display: flex;
   flex-direction: column;
-  // gap: 15px;
   // justify-content: space-between;
   margin: 5px auto;
   height: 100%;

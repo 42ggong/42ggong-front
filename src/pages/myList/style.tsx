@@ -17,18 +17,22 @@ export const InformContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 150px;
+  height: 240px;
+  min-height: 120px;
+  // min-height: calc(30% - 35px);
   border-radius: 20px;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
+  overflow: auto;
 `;
 
 // list box
 export const ListBoxContainer = styled.div`
   // border: solid;
   display: flex;
-  height: 70%;
+  height: 600px;
+  min-height: 300px;
   flex-direction: column;
   // border: solid;
   width: 100%;
@@ -50,17 +54,17 @@ export const ListBoxButtonContainer = styled.div``;
 
 export const ListBoxForm = styled.form`
   width: 100%;
-  // padding: 10px 25px;
   display: flex;
   flex-direction: column;
-  // gap: 15px;
   justify-content: space-between;
   margin: 5px auto;
   height: 100%;
 `;
 
 export const ListContainer = styled.div`
-  height: calc(100% - 60px);
+  height: 540px;
+  min-height: 240px;
+  // height: calc(100% - 60px);
   // overflow: auto;
 `;
 
@@ -149,6 +153,12 @@ export const DiscardButton = styled.button`
   &:hover {
     background-color: #ff478a;
   }
+`;
+export const ListFormButtonContianer = styled.div`
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const ListFormButton = styled.button`
