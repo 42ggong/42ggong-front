@@ -112,13 +112,15 @@ const ReDiscardBoxForm = () => {
             검색 후 추가
           </S.SearchButton>
         </S.SearchContainer>
-        <S.ListFormButton
-          onClick={onReDiscard}
-          tabIndex={-1}
-          disabled={countRediscard() < 1}
-        >
-          전체 처리
-        </S.ListFormButton>
+        <S.ListFormButtonContianer>
+          <S.ListFormButton
+            onClick={onReDiscard}
+            tabIndex={-1}
+            disabled={countRediscard() < 1}
+          >
+            전체 처리
+          </S.ListFormButton>
+        </S.ListFormButtonContianer>
       </S.ListBoxForm>
       {showModal && (
         <Modal

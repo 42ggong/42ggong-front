@@ -17,14 +17,16 @@ export const InformContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 320px;
-  min-height: 160px;
+  height: 240px;
+  min-height: 120px;
   // min-height: calc(30% - 35px);
   border-radius: 20px;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
+  overflow: auto;
 `;
+//  overflow: auto; 임시로..
 
 export const MenuButtonContainer = styled.div`
   // height: 5%;
@@ -187,9 +189,16 @@ export const DiscardButton = styled.button`
   }
 `;
 
+export const ListFormButtonContianer = styled.div`
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const ListFormButton = styled.button`
   width: 100%;
-  height: 60px;
+  height: 50px;
   border: none;
   // margin-left: 70%;
   border-radius: 20px;
@@ -205,10 +214,11 @@ export const ListFormButton = styled.button`
 
 export const SearchContainer = styled.div`
   width: 100%;
-  height: 50px;
+  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 10px;
 `;
 
 export const SearchInput = styled.input`

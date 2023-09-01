@@ -203,13 +203,15 @@ const DiscardBoxForm = () => {
             <h1>앗 아무고토 없어요!!</h1>
           )}
         </S.ListContainer>
-        <S.ListFormButton
-          onClick={onMultiDiscard}
-          disabled={countChecked() < 1}
-          tabIndex={-1}
-        >
-          선택 처리
-        </S.ListFormButton>
+        <S.ListFormButtonContianer>
+          <S.ListFormButton
+            onClick={onMultiDiscard}
+            disabled={countChecked() < 1}
+            tabIndex={-1}
+          >
+            선택 처리
+          </S.ListFormButton>
+        </S.ListFormButtonContianer>
       </S.ListBoxForm>
       {showModal && (
         <Modal
