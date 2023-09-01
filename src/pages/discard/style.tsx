@@ -213,7 +213,7 @@ export const ListFormButton = styled.button`
 
 export const SearchContainer = styled.div`
   width: 100%;
-  height: 60px;
+  height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -228,10 +228,11 @@ export const SearchInput = styled.input`
   font-size: 30px;
   text-align: center;
   border: 2px solid #5947ff;
+  margin-right: 10px;
 `;
 
 export const SearchButton = styled.button`
-  width: 25%;
+  width: 30%;
   height: 40px;
   border: none;
   // margin-left: 70%;
