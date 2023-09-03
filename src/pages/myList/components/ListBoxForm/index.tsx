@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import * as S from "../../style";
 import Modal from "../../../../components/Modal/index";
-import { useQueryClient, useQuery } from "@tanstack/react-query";
-import { getMyItemList } from "../../../../utils/api/item";
+import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
+import { getMyItemList, pullOutItems } from "../../../../utils/api/item";
 import { useAccessToken } from "../../../../utils/hooks/useAccessToekn";
 
 const today = new Date().toISOString().slice(5, 10);
@@ -15,6 +15,12 @@ const ListBoxForm = () => {
     queryFn: () => {
       return getMyItemList(accessToken.accessToken);
     },
+  });
+  const itemsPullOutMutation = useMutation({
+    mutationFn: pullOutItems,
+    // onSuccess: async (res) => {
+    //   console.log("pull out 200");
+    // },
   });
   const [showModal, setShowModal] = useState(false);
   const [modalText, setModalText] = useState("");
@@ -93,6 +99,17 @@ const ListBoxForm = () => {
   };
 
   const onSubmit = () => {
+    const pullOutData: any[] = [];
+
+    deleteArr.forEach((shouldDelete, idx) => {
+      if (shouldDelete) {
+        pullOutData.push(userQuery.data[idx].keepIdentifier);
+      }
+    });
+    itemsPullOutMutation.mutate({
+      keepIdentifierList: pullOutData,
+      accessToken: accessToken.accessToken,
+    });
     setCheckedArr(Array.from({ length: userQuery.data?.length }, () => false));
     setDeleteArr(Array.from({ length: userQuery.data?.length }, () => false));
     setModalText("");
@@ -116,6 +133,7 @@ const ListBoxForm = () => {
     setShowModal(true);
   };
 
+  if (!userQuery.data) return <>로딩중</>;
   return (
     <>
       <S.ListBoxForm>
@@ -154,7 +172,7 @@ const ListBoxForm = () => {
             <S.ListItemColumn style={{ width: "100px" }}>설명</S.ListItemColumn>
             <S.ListItemColumn style={{ width: "55px" }}> </S.ListItemColumn>
           </S.ListItemContainer>
-          {userQuery.data?.length > 1 ? (
+          {userQuery.data?.length > 0 ? (
             <S.ListRows>
               {userQuery.data?.map((element: any, index: number) => {
                 return (

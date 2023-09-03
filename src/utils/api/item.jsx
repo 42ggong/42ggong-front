@@ -29,3 +29,22 @@ export function getMyItemList(accessToken) {
       return res.data;
     });
 }
+
+export function pullOutItems(pullOutData) {
+  console.log("accessToken!!", pullOutData, pullOutData.accessToken);
+  return axios
+    .put(
+      `/api/v1/items/pullout`,
+      {
+        keepIdentifierList: pullOutData.keepIdentifierList,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${pullOutData.accessToken}`,
+        },
+      }
+    )
+    .then((res) => {
+      return res.data;
+    });
+}

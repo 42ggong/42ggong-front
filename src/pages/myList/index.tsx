@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from "react";
 import * as S from "./style";
-// import { useNavigate } from "react-router-dom";
-import HomeButton from "../../components/HomeButton/index";
 import ListBoxForm from "./components/ListBoxForm/index";
 
-// const dummyList = [
-//   { uid: "123123", expday: "08-21", info: "사과" },
-//   { uid: "123124", expday: "08-22", info: "배" },
-//   { uid: "123125", expday: "08-23", info: "두리안" },
-//   { uid: "123126", expday: "08-24", info: "오스트랄로피테쿠스" },
-// ];
-const MyList = () => {
-  // const navigate = useNavigate();
+// TODO: 뒤로가기 버튼 추가
 
+const MyList = () => {
   // TODO 리스트 박스를 컴포넌트로 빼서 관리 -> api 페칭할때 로딩화면이랑 리렌더효율용
   // ->분리는 했는데 더미데이터는 분리못했다... 리액트 쿼리 넣으면 캐싱데이터 쓰면 되니까 상관없을것같은데
   // 리코일 도입 여부도 생각을 좀 해야겠다.

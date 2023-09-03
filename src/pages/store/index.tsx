@@ -6,7 +6,7 @@ import useInput from "../../utils/hooks/useInput";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { postItem } from "../../utils/api/item";
 import { useAccessToken } from "../../utils/hooks/useAccessToekn";
-
+// TODO: 리액트쿼리 mutate ->  myList : 보관하면 리스트도 업데이트해서 유저경험 향상
 const Store = () => {
   const navigate = useNavigate();
   const accessToken = useAccessToken();
@@ -14,15 +14,10 @@ const Store = () => {
   const [labelData, setLabelData] = useState("");
   const itemStoreMutation = useMutation({
     mutationFn: postItem,
-    // onSuccess: () => {},
     onSuccess: async (res) => {
       setLabelData(`${res.keepIdentifier} ${res.keepExpiryDate}`);
       console.log("tet", `${res.keepIdentifier} ${res.keepExpiryDate}`);
-      // alert(`${res.keepIdentifier} ${res.keepExpiryDate} 라벨링하세요`);
     },
-    //   await queryClient.refetchQueries([`${item.category}`, "list"]);
-    //   navigate("/item", { state: { item: res.id, category: item.category } });
-    // },
   });
   const [showModal, setShowModal] = useState(false);
   const [briefInfo, onBrieftInfo, setBriefInfo] = useInput("");
@@ -95,6 +90,7 @@ const Store = () => {
             maxLength={6}
           />
         ) : (
+          // TODO: 높이 똑같이 맞추되 정렬옵션 추가
           <S.ItemInfoBox>{labelData}</S.ItemInfoBox>
         )}
         <div

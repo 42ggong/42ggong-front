@@ -165,7 +165,7 @@ const DiscardBoxForm = () => {
             <S.ListItemColumn style={{ width: "100px" }}>설명</S.ListItemColumn>
             <S.ListItemColumn style={{ width: "55px" }}> </S.ListItemColumn>
           </S.ListItemContainer>
-          {dummyList.length > 1 ? (
+          {dummyList.length > 0 ? (
             <S.ListRows>
               {dummyList.map((element: any, index: number) => {
                 return (
