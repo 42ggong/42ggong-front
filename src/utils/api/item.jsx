@@ -16,3 +16,16 @@ export function postItem(storeData) {
       return res.data;
     });
 }
+
+export function getMyItemList(accessToken) {
+  console.log("accessToken!!", accessToken);
+  return axios
+    .get(`/api/v1/users/me/items`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((res) => {
+      return res.data;
+    });
+}

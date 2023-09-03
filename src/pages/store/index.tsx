@@ -27,6 +27,7 @@ const Store = () => {
   const [showModal, setShowModal] = useState(false);
   const [briefInfo, onBrieftInfo, setBriefInfo] = useInput("");
 
+  console.log("Tet", briefInfo);
   const onCloseModal = useCallback(() => {
     setShowModal(false);
   }, []);
@@ -45,6 +46,7 @@ const Store = () => {
       // const storeFormData = new FormData();
       // storeFormData.append("accessToken", accessToken.accessToken);
       // storeFormData.append("description", briefInfo);
+      console.log("briefInfo", briefInfo);
       const storeData = {
         accessToken: accessToken.accessToken,
         description: briefInfo,
