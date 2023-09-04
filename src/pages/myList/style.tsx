@@ -13,7 +13,7 @@ export const MyListPageContainer = styled.div`
 
 // inform
 export const InformContainer = styled.div`
-  border: solid;
+  // border: solid;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -175,4 +175,12 @@ export const ListFormButton = styled.button`
   &:hover {
     background-color: #478eff;
   }
+`;
+
+export const EmptyContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

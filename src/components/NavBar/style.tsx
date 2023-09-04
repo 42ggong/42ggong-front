@@ -16,8 +16,6 @@ export const StyledNavBar = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: #282733;
-  padding-left: 10px;
-  padding-right: 10px;
 `;
 
 export const MenuButton = styled.img`

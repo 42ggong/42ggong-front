@@ -10,12 +10,12 @@ const DisCard = () => {
   return (
     <S.DiscardPageContainer>
       <S.InformContainer>
-        <h1>폐기하기</h1>
-        <span>안내메세지입니다 내 리스트</span>
-        <span>안내메세지입니다 내 리스트</span>
-        <span>안내메세지입니다 내 리스트</span>
-        <span>안내메세지입니다 내 리스트</span>
+        <h2>폐기하기</h2>
+        <span>유효기간이 지난 보관품은</span>
+        <span>누구나 폐기할 수 있습니다!</span>
+        <span>목록에서 찾을 수 없다면</span>
       </S.InformContainer>
+      <S.Line />
       <S.MenuButtonContainer>
         <S.MenuButton
           onClick={() => {

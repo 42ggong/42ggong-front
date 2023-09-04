@@ -10,10 +10,22 @@ const Main = () => {
   return (
     <S.MainPageContainer>
       <S.GgongInfoContainer>
-        <S.LogoImg src="/img/42ggongLogo.png" />
-        <h1>42GGONG과함께</h1>
-        <h2>같이 관리하는 냉장고!</h2>
+        <S.LogoImgContainer>
+          <S.LogoImg src="/img/42ggongLogo.png" />
+        </S.LogoImgContainer>
+        <S.InfoTextContainer>
+          <h2>42GGONG과함께</h2>
+          {/* <div>같이 관리하는 냉장고!</div> */}
+          <div>{`hyoparks님은`}</div>
+          {/* <div>{`누군가 10번 대신 폐기해주셨네요!`}</div> */}
+          <div>{`누군가를 대신해서 10번 폐기해주셨어요!`}</div>
+          <div>기본 보관일은 2일이예요</div>
+          <S.WarnText>
+            누군가 3번이상 내 보관품을 폐기해주면 보관일이 1일이되요...{" "}
+          </S.WarnText>
+        </S.InfoTextContainer>
       </S.GgongInfoContainer>
+      <S.Line />
       <S.RoutButtonContainer>
         <S.ButtonRow>
           <S.RoutButton
@@ -28,7 +40,8 @@ const Main = () => {
               handleClick("mylist");
             }}
           >
-            내 보관품 확인 및 찾기{" "}
+            <div>내 보관품 확인</div>
+            <div>및 찾기</div>
           </S.RoutButton>
         </S.ButtonRow>
         <S.ButtonRow>

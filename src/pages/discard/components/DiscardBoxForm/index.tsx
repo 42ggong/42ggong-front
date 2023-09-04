@@ -192,7 +192,9 @@ const DiscardBoxForm = () => {
               })}
             </S.ListRows>
           ) : (
-            <h1>앗 아무고토 없어요!!</h1>
+            <S.EmptyContainer>
+              <h2>냉장고가 깨끗해요! 😀</h2>
+            </S.EmptyContainer>
           )}
         </S.ListContainer>
         <S.ListFormButtonContianer>

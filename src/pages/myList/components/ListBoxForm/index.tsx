@@ -204,7 +204,9 @@ const ListBoxForm = () => {
               })}
             </S.ListRows>
           ) : (
-            <h1>앗 아무고토 없어요!!</h1>
+            <S.EmptyContainer>
+              <h2>😲 보관중인 물품이 없어요!</h2>
+            </S.EmptyContainer>
           )}
         </S.ListContainer>
         <S.ListFormButtonContianer>

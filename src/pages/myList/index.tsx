@@ -21,13 +21,12 @@ const MyList = () => {
   return (
     <S.MyListPageContainer>
       <S.InformContainer>
-        <h1>
-          나의 보관품
-          <br />
-          확인/찾기
-        </h1>
-        안내메세지입니다 내 리스트
+        <h2>나의 보관품 확인/찾기</h2>
+        <div>내가 보관중인 보관품들이예요</div>
+        <div>반드시 냉장고에서 꺼낸 후</div>
+        <div>찾기/폐기 해주세요!</div>
       </S.InformContainer>
+      <S.Line />
       <S.ListBoxContainer>
         {/* <S.ListBoxBorder> */}
         {/* <S.ListBoxButtonContainer></S.ListBoxButtonContainer> */}

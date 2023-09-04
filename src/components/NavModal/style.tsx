@@ -9,7 +9,7 @@ export const ModalContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 
-  background-color: red;
+  // background-color: red;
   border-radius: 20px;
 
   display: flex;
@@ -66,7 +66,11 @@ export const ButtonRow = styled.div`
 `;
 
 export const RoutButton = styled.button`
-  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
   background-color: #5947ff;
   color: white;
   border: none;

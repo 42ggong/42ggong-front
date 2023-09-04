@@ -20,7 +20,9 @@ const NavModal = ({ handleClose }: Iprops) => {
             <S.ButtonRow>
               <S.RoutButton
                 onClick={() => {
-                  handleClick("store");
+                  if (location.pathname.replace("/", "") !== "store") {
+                    handleClick("store");
+                  }
                   handleClose();
                 }}
               >
@@ -28,17 +30,22 @@ const NavModal = ({ handleClose }: Iprops) => {
               </S.RoutButton>
               <S.RoutButton
                 onClick={() => {
-                  handleClick("mylist");
+                  if (location.pathname.replace("/", "") !== "mylist") {
+                    handleClick("mylist");
+                  }
                   handleClose();
                 }}
               >
-                내 보관품 확인 및 찾기{" "}
+                <div>내 보관품 확인</div>
+                <div>및 찾기</div>
               </S.RoutButton>
             </S.ButtonRow>
             <S.ButtonRow>
               <S.RoutButton
                 onClick={() => {
-                  handleClick("discard");
+                  if (location.pathname.replace("/", "") !== "discard") {
+                    handleClick("discard");
+                  }
                   handleClose();
                 }}
               >
@@ -46,11 +53,14 @@ const NavModal = ({ handleClose }: Iprops) => {
               </S.RoutButton>
               <S.RoutButton
                 onClick={() => {
-                  handleClick("status");
+                  if (location.pathname.replace("/", "") !== "status") {
+                    handleClick("status");
+                  }
                   handleClose();
                 }}
               >
-                냉장고 현황 및 기록{" "}
+                <div>냉장고 현황</div>
+                <div>및 기록 </div>
               </S.RoutButton>
             </S.ButtonRow>
           </S.RoutButtonContainer>

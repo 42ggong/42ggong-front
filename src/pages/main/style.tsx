@@ -11,28 +11,54 @@ export const MainPageContainer = styled.div`
 `;
 
 export const GgongInfoContainer = styled.div`
-  border: solid;
+  // border: solid;
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 300px;
+  height: 350px;
   min-height: 120px;
   // min-height: calc(30% - 35px);
   border-radius: 20px;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   margin: 0 auto;
-  overflow: auto;
+  // overflow: auto;
+`;
+
+export const LogoImgContainer = styled.div`
+  height: 60px;
 `;
 
 export const LogoImg = styled.img`
-  width: 75px;
-  height: 75px;
+  width: 100%;
+  height: 100%;
   border-radius: 100px;
 
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const InfoTextContainer = styled.div`
+  height: calc(100% - 60px);
+  // border: solid;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 120px;
+
+  border-radius: 20px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  // overflow: auto;
+`;
+
+export const WarnText = styled.div`
+  font-size: 13px;
+  text-align: center;
+  margin-bottom: 5px;
+  color: #ff478a;
 `;
 
 export const RoutButtonContainer = styled.div`
@@ -55,6 +81,10 @@ export const ButtonRow = styled.div`
 `;
 
 export const RoutButton = styled.button`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   font-size: 18px;
   background-color: #5947ff;
   color: white;
@@ -69,4 +99,11 @@ export const RoutButton = styled.button`
   &:hover {
     background-color: #478eff;
   }
+`;
+
+export const Line = styled.hr`
+  width: 85%;
+  max-width: 600px;
+
+  border: 1.5px solid #478eff;
 `;

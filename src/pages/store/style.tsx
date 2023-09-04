@@ -35,6 +35,13 @@ export const InfromText = styled.div`
   margin-bottom: 5px;
 `;
 
+export const WarnText = styled.div`
+  font-size: 13px;
+  text-align: center;
+  margin-bottom: 5px;
+  color: #ff478a;
+`;
+
 export const Line = styled.hr`
   width: 85%;
   max-width: 600px;
@@ -53,22 +60,31 @@ export const ItemInfoInputContainer = styled.div`
   margin: 10px auto;
 `;
 
-export const ItemInfoInputLabel = styled.label``;
+export const ItemInfoInputLabel = styled.div`
+  // height: 30px;
+`;
 
 export const ItemInfoBox = styled.div`
-  height: 50px;
+  height: 70px;
   width: 75%;
   border-radius: 10px;
   font-size: 30px;
   text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
   border: 2px solid #5947ff;
+  background: #c6c3eb;
 `;
+
 export const ItemInfoInput = styled.input`
   height: 70px;
   width: 75%;
   border-radius: 20px;
   font-size: 30px;
   text-align: center;
+  display: flex;
+  justify-content: center;
   border: 2px solid #5947ff;
 `;
 

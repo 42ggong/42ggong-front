@@ -20,20 +20,22 @@ const NavBar = ({ userName }: Iprops) => {
 
   return (
     <S.StyledNavBar>
-      {/* <div style={{ display: "flex" }}> */}
       <S.MenuIconContainer>
-        <HomeButton />
+        {location.pathname.replace("/", "") ? <HomeButton /> : <></>}
       </S.MenuIconContainer>
       <S.UserNameContainer>{`${userName}님과 함께 꽁!`}</S.UserNameContainer>
-      {/* </div> */}
       <S.MenuIconContainer>
-        <AiOutlineAppstore
-          style={{ color: "#478eff", width: "100%", height: "100%" }}
-          onClick={(e: any) => {
-            if (location.pathname.replace("/", "") !== "")
-              setShowModal(!showModal);
-          }}
-        />
+        {location.pathname.replace("/", "") ? (
+          <AiOutlineAppstore
+            style={{ color: "#5947ff", width: "100%", height: "100%" }}
+            onClick={(e: any) => {
+              if (location.pathname.replace("/", "") !== "")
+                setShowModal(!showModal);
+            }}
+          />
+        ) : (
+          <></>
+        )}
       </S.MenuIconContainer>
       {showModal && <NavModal handleClose={onCloseModal} />}
     </S.StyledNavBar>

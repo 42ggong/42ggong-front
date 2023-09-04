@@ -40,7 +40,8 @@ const ReDiscardBoxForm = () => {
         }).then((res) => {
           console.log("상태코드!!");
           if (!res) {
-            console.log("모달! 없는 식별자");
+            setModalText("없는 식별자예요.. ㅜㅜ");
+            setShowModal(true);
           } else {
             console.log(res);
             setReDiscardArr([

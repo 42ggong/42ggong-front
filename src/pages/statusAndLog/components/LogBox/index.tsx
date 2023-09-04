@@ -51,45 +51,21 @@ const DiscardBoxForm = () => {
     setDeleteArr(tmpArr);
   };
 
-  const generateButton = (listElement: any, index: any) => {
-    if (listElement.keepExpiryDate > today)
-      // TODO 내거인지아닌지 알아야함 // 백엔드에 요청하기 my인지 아닌지
-      return (
-        <S.PullButton
-          onClick={(e) => {
-            e.preventDefault();
-            setModalText(
-              `${listElement.keepIdentifier} ${listElement.description} 를 처리합니다.
-				반드시 냉장고에서
-				꺼낸 후에 완료해주세요!`
-            );
-            setDeleteArrByIndex(index);
-            setShowModal(true);
-          }}
-          tabIndex={-1}
-        >
-          찾기
-        </S.PullButton>
-      );
-    return (
-      <S.DiscardButton
-        onClick={(e) => {
-          e.preventDefault();
-          setModalText(
-            `${listElement.keepIdentifier} ${listElement.description} 를 처리합니다.
-			  반드시 냉장고에서
-			  꺼낸 후에 완료해주세요!`
-          );
-          // TODO 선택 누루고 폐기 누르면 에러 -> 단일 모달을 따로 처리할 방법 생각
-          // setCheckedArrByIndex(index);
-          setDeleteArrByIndex(index);
-          setShowModal(true);
-        }}
-        tabIndex={-1}
-      >
-        폐기
-      </S.DiscardButton>
-    );
+  const generateStatus = (status: string) => {
+    switch (status) {
+      case "PULLOUT":
+        return "찾음";
+        break;
+      case "KEEP":
+        return "보관";
+        break;
+      case "DISUSE":
+        return "폐기";
+        break;
+      default:
+        break;
+    }
+    return status;
   };
   const countChecked = () => {
     return checkedArr.filter((element) => element === true).length;
@@ -127,29 +103,7 @@ const DiscardBoxForm = () => {
       <S.ListBoxForm>
         <S.ListContainer>
           <S.ListItemContainer style={{ backgroundColor: "#6c5cff" }}>
-            <S.ListItemCheckBoxContainer>
-              <S.ListItemCheckBox
-                type="checkbox"
-                checked={allChecked}
-                tabIndex={-1}
-                onChange={() => {
-                  if (checkedArr.indexOf(false) === -1) {
-                    setAllChecked(false);
-                    setCheckedArr(
-                      Array.from(
-                        { length: userQuery.data?.length },
-                        () => false
-                      )
-                    );
-                  } else {
-                    setAllChecked(true);
-                    setCheckedArr(
-                      Array.from({ length: userQuery.data?.length }, () => true)
-                    );
-                  }
-                }}
-              />
-            </S.ListItemCheckBoxContainer>
+            <S.ListItemColumn style={{ width: "10px" }} />
             <S.ListItemColumn style={{ width: "60px" }}>
               식별자
             </S.ListItemColumn>
@@ -157,7 +111,7 @@ const DiscardBoxForm = () => {
               유효기간
             </S.ListItemColumn>
             <S.ListItemColumn style={{ width: "100px" }}>설명</S.ListItemColumn>
-            <S.ListItemColumn style={{ width: "55px" }}> </S.ListItemColumn>
+            <S.ListItemColumn style={{ width: "55px" }}>상태</S.ListItemColumn>
           </S.ListItemContainer>
           {userQuery.data?.length > 0 ? (
             <S.ListRows>
@@ -167,16 +121,7 @@ const DiscardBoxForm = () => {
                     style={{ margin: "5px auto" }}
                     key={element.keepIdentifier}
                   >
-                    <S.ListItemCheckBoxContainer>
-                      <S.ListItemCheckBox
-                        type="checkbox"
-                        checked={checkedArr[index]}
-                        tabIndex={-1}
-                        onChange={() => {
-                          setCheckedArrByIndex(index);
-                        }}
-                      />
-                    </S.ListItemCheckBoxContainer>
+                    <S.ListItemColumn style={{ width: "10px" }} />
                     <S.ListItemColumn style={{ width: "60px" }}>
                       {element.keepIdentifier}
                     </S.ListItemColumn>
@@ -187,6 +132,7 @@ const DiscardBoxForm = () => {
                       {element.description}
                     </S.ListItemColumn>
                     <S.ListItemColumn style={{ width: "55px" }}>
+                      {generateStatus(element.keepStatus)}
                       {/* {generateButton(element, index)} */}
                     </S.ListItemColumn>
                   </S.ListItemContainer>

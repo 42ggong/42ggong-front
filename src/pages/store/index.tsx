@@ -47,10 +47,8 @@ const Store = () => {
         description: briefInfo,
       };
       itemStoreMutation.mutate(storeData);
-      // console.log("Tet!2", storeData);
       setBriefInfo("");
       setShowModal(false);
-      // navigate("/");
     },
     [accessToken, briefInfo]
   );
@@ -62,26 +60,32 @@ const Store = () => {
           {labelData === "" ? "보관안내" : "보관완료"}
         </S.InfromTitle>
         <S.InfromTextContainer>
-          {labelData === "" ? (
-            <>
-              <S.InfromText>보관품에대한 간단한 설명 작성</S.InfromText>
-              <S.InfromText>42ggong을 이용하여 라벨생성</S.InfromText>
-              <S.InfromText>생성된 라벨을 보관품에 부착</S.InfromText>
-            </>
-          ) : (
-            <>
-              <S.InfromText>반드시 아래의 라벨 10자리를</S.InfromText>
-              <S.InfromText> 보관품에 부착하여 보관해주세요!</S.InfromText>
-            </>
-          )}
-          <S.InfromText>라벨을 붙이지 않으면</S.InfromText>
-          <S.InfromText>언제든 폐기될수있어요!</S.InfromText>
+          <div style={{ marginBottom: "17px" }}>
+            {labelData === "" ? (
+              <>
+                <S.InfromText>☝🏼 보관품에대한 간단한 설명 작성</S.InfromText>
+                <S.InfromText>✌🏼 보관 버튼을 눌러 라벨 생성</S.InfromText>
+                <S.InfromText>🤟🏼 생성된 라벨을 보관품에 부착</S.InfromText>
+              </>
+            ) : (
+              <>
+                <S.InfromText>반드시 아래의 라벨 10자리를</S.InfromText>
+                <S.InfromText> 보관품에 부착하여 보관해주세요!</S.InfromText>
+              </>
+            )}
+          </div>
+          <S.WarnText>
+            주의! 라벨을 붙이지 않으면 언제든 폐기될수있어요!
+          </S.WarnText>
+          {/* <S.WarnText>언제든 폐기될수있어요!</S.WarnText> */}
         </S.InfromTextContainer>
       </S.InformContainer>
       <S.Line />
       <S.ItemInfoInputContainer>
         <S.ItemInfoInputLabel>
-          보관품에대해 간단한 설명을 남겨보아요!
+          {labelData === ""
+            ? "보관품에대해 간단한 설명을 남겨보아요!"
+            : "생성된 라벨 10자리"}
         </S.ItemInfoInputLabel>
         {labelData === "" ? (
           <S.ItemInfoInput
@@ -90,8 +94,9 @@ const Store = () => {
             maxLength={6}
           />
         ) : (
-          // TODO: 높이 똑같이 맞추되 정렬옵션 추가
-          <S.ItemInfoBox>{labelData}</S.ItemInfoBox>
+          <S.ItemInfoBox>
+            <S.ItemInfoInputLabel>{labelData}</S.ItemInfoInputLabel>
+          </S.ItemInfoBox>
         )}
         <div
           style={{ color: "gray", marginLeft: "65%" }}
@@ -124,7 +129,7 @@ const Store = () => {
           <Modal
             handleClose={onCloseModal}
             handleSubmit={handleSubmit}
-            text="안녕 난 모달"
+            text="보관기간은 기본 2일이며, 누군가 나 대신 폐기를 3번이상 해주었으면 1일로 줄어들어요"
           />
         )}
       </form>
