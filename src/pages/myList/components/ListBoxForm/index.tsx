@@ -5,7 +5,8 @@ import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
 import { getMyItemList, pullOutItems } from "../../../../utils/api/item";
 import { useAccessToken } from "../../../../utils/hooks/useAccessToekn";
 
-const today = new Date().toISOString().slice(5, 10);
+const today =
+  new Date().toISOString().slice(5, 7) + new Date().toISOString().slice(8, 10);
 
 const ListBoxForm = () => {
   const queryClient = useQueryClient();

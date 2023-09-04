@@ -41,9 +41,10 @@ export function getMyItemList(accessToken) {
     });
 }
 
+// 폐기가능리스트
 export function getExpiredItemList(accessToken) {
   return axios
-    .get(`/api/v1/items?isExpired=true`, {
+    .get(`/api/v1/items?isExpired=true&keepStatus=KEEP`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -53,6 +54,7 @@ export function getExpiredItemList(accessToken) {
     });
 }
 
+// 로그
 export function getAllItemList(accessToken) {
   return axios
     .get(`/api/v1/items`, {
@@ -75,7 +77,6 @@ export function getCurrItemList(accessToken) {
     .then((res) => {
       return res.data;
     });
-
 }
 export function pullOutItems(pullOutData) {
   console.log("accessToken!!", pullOutData, pullOutData.accessToken);

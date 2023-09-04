@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import * as S from "../../style";
 import Modal from "../../../../components/Modal/index";
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
-import { getExpiredItemList } from "../../../../utils/api/item";
+import { getExpiredItemList, pullOutItems } from "../../../../utils/api/item";
 import { useAccessToken } from "../../../../utils/hooks/useAccessToekn";
 
-const today = new Date().toISOString().slice(5, 10);
+const today =
+  new Date().toISOString().slice(5, 7) + new Date().toISOString().slice(8, 10);
 
 const DiscardBoxForm = () => {
   const queryClient = useQueryClient();
@@ -20,9 +21,9 @@ const DiscardBoxForm = () => {
   useEffect(() => {
     userQuery.refetch();
   }, [userQuery]);
-  // const itemsPullOutMutation = useMutation({
-  //   mutationFn: pullOutItems,
-  // });
+  const itemsPullOutMutation = useMutation({
+    mutationFn: pullOutItems,
+  });
   const [showModal, setShowModal] = useState(false);
   const [modalText, setModalText] = useState("");
   const [allChecked, setAllChecked] = useState(false);
@@ -52,6 +53,11 @@ const DiscardBoxForm = () => {
   };
 
   const generateButton = (listElement: any, index: any) => {
+    console.log(
+      "toda ,listElement.keepExpiryDate ",
+      today,
+      listElement.keepExpiryDate
+    );
     if (listElement.keepExpiryDate > today)
       return (
         <S.PullButton
@@ -98,6 +104,18 @@ const DiscardBoxForm = () => {
     // userQuery.data? = userQuery.data?.filter(
     //   (element: any, index: any) => deleteArr[index] === false
     // );
+    const pullOutData: any[] = [];
+
+    deleteArr.forEach((shouldDelete, idx) => {
+      if (shouldDelete) {
+        pullOutData.push(userQuery.data[idx].keepIdentifier);
+      }
+    });
+    itemsPullOutMutation.mutate({
+      keepIdentifierList: pullOutData,
+      accessToken: accessToken.accessToken,
+    });
+
     setCheckedArr(Array.from({ length: userQuery.data?.length }, () => false));
     setDeleteArr(Array.from({ length: userQuery.data?.length }, () => false));
     setModalText("");

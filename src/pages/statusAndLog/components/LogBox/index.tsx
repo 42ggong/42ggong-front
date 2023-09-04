@@ -5,9 +5,10 @@ import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
 import { getAllItemList } from "../../../../utils/api/item";
 import { useAccessToken } from "../../../../utils/hooks/useAccessToekn";
 
-const today = new Date().toISOString().slice(5, 10);
+const today =
+  new Date().toISOString().slice(5, 7) + new Date().toISOString().slice(8, 10);
 
-const DiscardBoxForm = () => {
+const LogBox = () => {
   const queryClient = useQueryClient();
   const accessToken = useAccessToken();
   const userQuery = useQuery({
@@ -59,7 +60,7 @@ const DiscardBoxForm = () => {
       case "KEEP":
         return "보관";
         break;
-      case "DISUSE":
+      case "DISUSED":
         return "폐기";
         break;
       default:
@@ -164,4 +165,4 @@ const DiscardBoxForm = () => {
   );
 };
 
-export default DiscardBoxForm;
+export default LogBox;

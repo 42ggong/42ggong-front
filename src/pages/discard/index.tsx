@@ -13,7 +13,8 @@ const DisCard = () => {
         <h2>폐기하기</h2>
         <span>유효기간이 지난 보관품은</span>
         <span>누구나 폐기할 수 있습니다!</span>
-        <span>목록에서 찾을 수 없다면</span>
+        <span>정리를 도와주면 패널티를 예방할 수 있어요!</span>
+        {/* <span>함께 냉장고 정리 선순환을 만들어보아요!</span> */}
       </S.InformContainer>
       <S.Line />
       <S.MenuButtonContainer>

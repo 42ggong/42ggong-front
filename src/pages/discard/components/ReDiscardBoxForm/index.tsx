@@ -3,17 +3,18 @@ import * as S from "../../style";
 import Modal from "../../../../components/Modal/index";
 import useInput from "../../../../utils/hooks/useInput";
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
-import { searchItem } from "../../../../utils/api/item";
+import { searchItem, pullOutItems } from "../../../../utils/api/item";
 import { useAccessToken } from "../../../../utils/hooks/useAccessToekn";
 
-const today = new Date().toISOString().slice(5, 10);
+const today =
+  new Date().toISOString().slice(5, 7) + new Date().toISOString().slice(8, 10);
 
 const ReDiscardBoxForm = () => {
   // const queryClient = useQueryClient();
   const accessToken = useAccessToken();
-  // const itemsPullOutMutation = useMutation({
-  //   mutationFn: pullOutItems,
-  // });
+  const itemsPullOutMutation = useMutation({
+    mutationFn: pullOutItems,
+  });
   const [reDiscardArr, setReDiscardArr] = useState<any[]>([]);
   const [searchUid, onSearchUid, setSearchUid] = useInput("");
   // const userQuery = useQuery({
@@ -72,6 +73,16 @@ const ReDiscardBoxForm = () => {
   };
 
   const onSubmit = () => {
+    const pullOutData: any[] = [];
+
+    reDiscardArr.forEach((ele) => {
+      pullOutData.push(ele.keepIdentifier);
+    });
+    itemsPullOutMutation.mutate({
+      keepIdentifierList: pullOutData,
+      accessToken: accessToken.accessToken,
+    });
+
     setReDiscardArr([]);
     setModalText("");
     setShowModal(false);
