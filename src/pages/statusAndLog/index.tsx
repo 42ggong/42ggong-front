@@ -1,43 +1,39 @@
 import React, { useState } from "react";
 import * as S from "./style";
-import HomeButton from "../../components/HomeButton/index";
 import StatusBox from "./components/StatusBox/index";
 import LogBox from "./components/LogBox/index";
 
-const DisCard = () => {
-  const [isPossibleList, setIsPossibleList] = useState(true);
+const StatusAndLog = () => {
+  const [isStatus, setIsStatus] = useState(true);
 
   return (
-    <>
-      <HomeButton />
+    <S.StatusAndLogPage>
       <S.InformContainer>
         안내메세지입니다 냉장고 현황 및 기록
       </S.InformContainer>
+      <S.MenuButtonContainer>
+        <S.MenuButton
+          onClick={() => {
+            setIsStatus(true);
+          }}
+          style={{ background: `${isStatus ? "#5947ff" : "#bdb5ff"}` }}
+        >
+          냉장고 현황
+        </S.MenuButton>
+        <S.MenuButton
+          onClick={() => {
+            setIsStatus(false);
+          }}
+          style={{ background: `${!isStatus ? "#5947ff" : "#bdb5ff"}` }}
+        >
+          전체 사용 기록
+        </S.MenuButton>
+      </S.MenuButtonContainer>
       <S.ListBoxContainer>
-        <S.ListBoxBorder>
-          <div>
-            <S.ListBoxButtonContainer>
-              <button
-                onClick={() => {
-                  setIsPossibleList(true);
-                }}
-              >
-                냉장고 현황
-              </button>
-              <button
-                onClick={() => {
-                  setIsPossibleList(false);
-                }}
-              >
-                냉장고 사용 기록
-              </button>
-            </S.ListBoxButtonContainer>
-            {isPossibleList ? <StatusBox /> : <LogBox />}
-          </div>
-        </S.ListBoxBorder>
+        {isStatus ? <StatusBox /> : <LogBox />}
       </S.ListBoxContainer>
-    </>
+    </S.StatusAndLogPage>
   );
 };
 
-export default DisCard;
+export default StatusAndLog;

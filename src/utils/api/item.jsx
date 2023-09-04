@@ -17,8 +17,19 @@ export function postItem(storeData) {
     });
 }
 
+export async function searchItem(searchData) {
+  return axios
+    .get(`/api/v1/items/identifier/${searchData.keepIdentifier}`, {
+      headers: {
+        Authorization: `Bearer ${searchData.accessToken}`,
+      },
+    })
+    .then((res) => {
+      return res.data;
+    });
+}
+
 export function getMyItemList(accessToken) {
-  console.log("accessToken!!", accessToken);
   return axios
     .get(`/api/v1/users/me/items`, {
       headers: {
@@ -30,6 +41,42 @@ export function getMyItemList(accessToken) {
     });
 }
 
+export function getExpiredItemList(accessToken) {
+  return axios
+    .get(`/api/v1/items?isExpired=true`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((res) => {
+      return res.data;
+    });
+}
+
+export function getAllItemList(accessToken) {
+  return axios
+    .get(`/api/v1/items`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((res) => {
+      return res.data;
+    });
+}
+
+export function getCurrItemList(accessToken) {
+  return axios
+    .get(`/api/v1/items?keepStatus=KEEP`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((res) => {
+      return res.data;
+    });
+
+}
 export function pullOutItems(pullOutData) {
   console.log("accessToken!!", pullOutData, pullOutData.accessToken);
   return axios

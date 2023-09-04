@@ -8,7 +8,7 @@ const HomeButton = () => {
     <StyledHomeButton
       src="/img/42ggongLogo.png"
       onClick={() => {
-        navigate("/");
+        if (location.pathname.replace("/", "") !== "") navigate("/");
       }}
     />
   );

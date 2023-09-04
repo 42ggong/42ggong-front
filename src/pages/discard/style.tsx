@@ -131,6 +131,7 @@ export const ListItemCheckBoxContainer = styled.div`
   justify-content: center;
   width: 30px;
 `;
+
 export const ListItemCheckBox = styled.input`
   // position: relative;
   // margin: 0 auto;

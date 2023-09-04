@@ -18,9 +18,6 @@ const ListBoxForm = () => {
   });
   const itemsPullOutMutation = useMutation({
     mutationFn: pullOutItems,
-    // onSuccess: async (res) => {
-    //   console.log("pull out 200");
-    // },
   });
   const [showModal, setShowModal] = useState(false);
   const [modalText, setModalText] = useState("");

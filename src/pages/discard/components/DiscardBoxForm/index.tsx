@@ -1,47 +1,36 @@
 import React, { useState, useEffect } from "react";
 import * as S from "../../style";
 import Modal from "../../../../components/Modal/index";
-
-let dummyList = [
-  { uid: "123123", expday: "10-21", info: "사과" },
-  { uid: "123124", expday: "08-22", info: "배" },
-  { uid: "123125", expday: "08-23", info: "두리안" },
-  { uid: "123126", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁" },
-  { uid: "123127", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁1" },
-  { uid: "123128", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁2" },
-  { uid: "123129", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁3" },
-  { uid: "123111", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁4" },
-  { uid: "123112", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁5" },
-  { uid: "123113", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁6" },
-  { uid: "123114", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁7" },
-  { uid: "123115", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁8" },
-  { uid: "123116", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁9" },
-  { uid: "123117", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁0" },
-  { uid: "123118", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁12" },
-  { uid: "123119", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁13" },
-  { uid: "123120", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁14" },
-  { uid: "123141", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁15" },
-  { uid: "123142", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁16" },
-  { uid: "123143", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁17" },
-  { uid: "123144", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁18" },
-  { uid: "123145", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁19" },
-  { uid: "123146", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁20" },
-  { uid: "123147", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁22" },
-  { uid: "123148", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁23" },
-  { uid: "123149", expday: "08-24", info: "뷁뷁뷁뷁뷁뷁24" },
-];
+import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
+import { getExpiredItemList } from "../../../../utils/api/item";
+import { useAccessToken } from "../../../../utils/hooks/useAccessToekn";
 
 const today = new Date().toISOString().slice(5, 10);
 
 const DiscardBoxForm = () => {
+  const queryClient = useQueryClient();
+  const accessToken = useAccessToken();
+  const userQuery = useQuery({
+    queryKey: ["expiredList"],
+    queryFn: () => {
+      return getExpiredItemList(accessToken.accessToken);
+    },
+  });
+  if (userQuery.isError) console.log(JSON.stringify(userQuery.error));
+  useEffect(() => {
+    userQuery.refetch();
+  }, [userQuery]);
+  // const itemsPullOutMutation = useMutation({
+  //   mutationFn: pullOutItems,
+  // });
   const [showModal, setShowModal] = useState(false);
   const [modalText, setModalText] = useState("");
   const [allChecked, setAllChecked] = useState(false);
   const [checkedArr, setCheckedArr] = useState(
-    Array.from({ length: dummyList.length }, () => false)
+    Array.from({ length: userQuery.data?.length }, () => false)
   );
   const [deleteArr, setDeleteArr] = useState(
-    Array.from({ length: dummyList.length }, () => false)
+    Array.from({ length: userQuery.data?.length }, () => false)
   );
 
   useEffect(() => {
@@ -57,19 +46,19 @@ const DiscardBoxForm = () => {
   };
 
   const setDeleteArrByIndex = (index: any) => {
-    const tmpArr = Array.from({ length: dummyList.length }, () => false);
+    const tmpArr = Array.from({ length: userQuery.data?.length }, () => false);
     tmpArr[index] = true;
     setDeleteArr(tmpArr);
   };
 
   const generateButton = (listElement: any, index: any) => {
-    if (listElement.expday > today)
+    if (listElement.keepExpiryDate > today)
       return (
         <S.PullButton
           onClick={(e) => {
             e.preventDefault();
             setModalText(
-              `${listElement.uid} ${listElement.info} 를 처리합니다.
+              `${listElement.keepIdentifier} ${listElement.description} 를 처리합니다.
 				반드시 냉장고에서
 				꺼낸 후에 완료해주세요!`
             );
@@ -86,7 +75,7 @@ const DiscardBoxForm = () => {
         onClick={(e) => {
           e.preventDefault();
           setModalText(
-            `${listElement.uid} ${listElement.info} 를 처리합니다.
+            `${listElement.keepIdentifier} ${listElement.description} 를 처리합니다.
 			  반드시 냉장고에서
 			  꺼낸 후에 완료해주세요!`
           );
@@ -106,11 +95,11 @@ const DiscardBoxForm = () => {
   };
 
   const onSubmit = () => {
-    dummyList = dummyList.filter(
-      (element: any, index: any) => deleteArr[index] === false
-    );
-    setCheckedArr(Array.from({ length: dummyList.length }, () => false));
-    setDeleteArr(Array.from({ length: dummyList.length }, () => false));
+    // userQuery.data? = userQuery.data?.filter(
+    //   (element: any, index: any) => deleteArr[index] === false
+    // );
+    setCheckedArr(Array.from({ length: userQuery.data?.length }, () => false));
+    setDeleteArr(Array.from({ length: userQuery.data?.length }, () => false));
     setModalText("");
     setShowModal(false);
   };
@@ -145,12 +134,15 @@ const DiscardBoxForm = () => {
                   if (checkedArr.indexOf(false) === -1) {
                     setAllChecked(false);
                     setCheckedArr(
-                      Array.from({ length: dummyList.length }, () => false)
+                      Array.from(
+                        { length: userQuery.data?.length },
+                        () => false
+                      )
                     );
                   } else {
                     setAllChecked(true);
                     setCheckedArr(
-                      Array.from({ length: dummyList.length }, () => true)
+                      Array.from({ length: userQuery.data?.length }, () => true)
                     );
                   }
                 }}
@@ -165,13 +157,13 @@ const DiscardBoxForm = () => {
             <S.ListItemColumn style={{ width: "100px" }}>설명</S.ListItemColumn>
             <S.ListItemColumn style={{ width: "55px" }}> </S.ListItemColumn>
           </S.ListItemContainer>
-          {dummyList.length > 0 ? (
+          {userQuery.data?.length > 0 ? (
             <S.ListRows>
-              {dummyList.map((element: any, index: number) => {
+              {userQuery.data?.map((element: any, index: number) => {
                 return (
                   <S.ListItemContainer
                     style={{ margin: "5px auto" }}
-                    key={element.uid}
+                    key={element.keepIdentifier}
                   >
                     <S.ListItemCheckBoxContainer>
                       <S.ListItemCheckBox
@@ -184,13 +176,13 @@ const DiscardBoxForm = () => {
                       />
                     </S.ListItemCheckBoxContainer>
                     <S.ListItemColumn style={{ width: "60px" }}>
-                      {element.uid}
+                      {element.keepIdentifier}
                     </S.ListItemColumn>
                     <S.ListItemColumn style={{ width: "60px" }}>
-                      {element.expday}
+                      {element.keepExpiryDate}
                     </S.ListItemColumn>
                     <S.ListItemColumn style={{ width: "100px" }}>
-                      {element.info}
+                      {element.description}
                     </S.ListItemColumn>
                     <S.ListItemColumn style={{ width: "55px" }}>
                       {generateButton(element, index)}

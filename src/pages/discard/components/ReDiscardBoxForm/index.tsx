@@ -2,22 +2,65 @@ import React, { useState, useEffect } from "react";
 import * as S from "../../style";
 import Modal from "../../../../components/Modal/index";
 import useInput from "../../../../utils/hooks/useInput";
+import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
+import { searchItem } from "../../../../utils/api/item";
+import { useAccessToken } from "../../../../utils/hooks/useAccessToekn";
 
 const today = new Date().toISOString().slice(5, 10);
 
 const ReDiscardBoxForm = () => {
+  // const queryClient = useQueryClient();
+  const accessToken = useAccessToken();
+  // const itemsPullOutMutation = useMutation({
+  //   mutationFn: pullOutItems,
+  // });
   const [reDiscardArr, setReDiscardArr] = useState<any[]>([]);
   const [searchUid, onSearchUid, setSearchUid] = useInput("");
+  // const userQuery = useQuery({
+  //   queryKey: ["searchItem", searchUid],
+  //   queryFn: () => {
+  //     return searchItem({
+  //       keepIdentifier: searchUid,
+  //       accessToken: accessToken.accessToken,
+  //     });
+  //   },
+  // });
   const handleSubmit = (e: any) => {
     e.preventDefault();
     // api 후 처리
+    try {
+      if (
+        searchUid &&
+        searchUid.trim() &&
+        reDiscardArr.filter((e) => e.keepIdentifier === searchUid).length === 0
+      ) {
+        searchItem({
+          keepIdentifier: searchUid,
+          accessToken: accessToken.accessToken,
+        }).then((res) => {
+          console.log("상태코드!!");
+          if (!res) {
+            console.log("모달! 없는 식별자");
+          } else {
+            console.log(res);
+            setReDiscardArr([
+              ...reDiscardArr,
+              {
+                keepIdentifier: res.keepIdentifier,
+                keepExpiryDate: res.keepExpiryDate,
+                description: res.description,
+              },
+            ]);
+          }
+        });
+      }
+    } catch (e: any) {
+      console.error(e.message);
+      // 에러 처리
+    }
     console.log(searchUid);
     // 배열에 추가하기전에 중복검사 필요
-    if (searchUid && searchUid.trim() && reDiscardArr.indexOf(searchUid) === -1)
-      setReDiscardArr([
-        ...reDiscardArr,
-        { uid: searchUid, expday: today, info: "몰루" },
-      ]);
+
     setSearchUid("");
   };
 
@@ -69,17 +112,17 @@ const ReDiscardBoxForm = () => {
               return (
                 <S.ListItemContainer
                   style={{ margin: "5px auto" }}
-                  key={element.uid}
+                  key={element.keepIdentifier}
                 >
                   <S.ListItemCheckBoxContainer />
                   <S.ListItemColumn style={{ width: "60px" }}>
-                    {element.uid}
+                    {element.keepIdentifier}
                   </S.ListItemColumn>
                   <S.ListItemColumn style={{ width: "60px" }}>
-                    {element.expday}
+                    {element.keepExpiryDate}
                   </S.ListItemColumn>
                   <S.ListItemColumn style={{ width: "100px" }}>
-                    {element.info}
+                    {element.description}
                   </S.ListItemColumn>
                   <S.ListItemColumn style={{ width: "55px" }}>
                     <S.DiscardButton
