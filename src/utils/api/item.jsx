@@ -54,12 +54,12 @@ export function getExpiredItemList(accessToken) {
     });
 }
 
-// 로그
-export function getAllItemList(accessToken) {
+//
+export function getItemHistoryList(data) {
   return axios
-    .get(`/api/v1/items`, {
+    .get(`/api/v1/item-histories?page=${data.page}`, {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${data.accessToken}`,
       },
     })
     .then((res) => {
@@ -67,6 +67,7 @@ export function getAllItemList(accessToken) {
     });
 }
 
+// 냉장고 현황
 export function getCurrItemList(accessToken) {
   return axios
     .get(`/api/v1/items?keepStatus=KEEP`, {

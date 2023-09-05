@@ -2,55 +2,45 @@ import React, { useState, useEffect } from "react";
 import * as S from "../../style";
 import Modal from "../../../../components/Modal/index";
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
-import { getAllItemList } from "../../../../utils/api/item";
+import { getItemHistoryList } from "../../../../utils/api/item";
 import { useAccessToken } from "../../../../utils/hooks/useAccessToekn";
 
 const today =
   new Date().toISOString().slice(5, 7) + new Date().toISOString().slice(8, 10);
 
 const LogBox = () => {
+  const [page, setPage] = useState(0);
   const queryClient = useQueryClient();
   const accessToken = useAccessToken();
   const userQuery = useQuery({
     queryKey: ["allItemList"],
     queryFn: () => {
-      return getAllItemList(accessToken.accessToken);
+      return getItemHistoryList({
+        page: page,
+        accessToken: accessToken.accessToken,
+      });
     },
   });
+  // let totalPage = userQuery.data?.totalPage;
+  const [totalpage, setTotalPage] = useState(
+    Array.from({ length: 10 }, (_, index) => {
+      console.log("idididi", index, userQuery.data?.totalPage);
+      if (userQuery.data?.totalPage >= index + 1) return true;
+      return false;
+    })
+  );
+  console.log("totalpage", totalpage);
   if (userQuery.isError) console.log(JSON.stringify(userQuery.error));
   useEffect(() => {
     userQuery.refetch();
-  }, [userQuery]);
-  // const itemsPullOutMutation = useMutation({
-  //   mutationFn: pullOutItems,
-  // });
+    Array.from({ length: 10 }, (_, index) => {
+      if (userQuery.data?.totalPage >= index + 1) return true;
+      return false;
+    });
+  }, [userQuery, page]);
+
   const [showModal, setShowModal] = useState(false);
   const [modalText, setModalText] = useState("");
-  const [allChecked, setAllChecked] = useState(false);
-  const [checkedArr, setCheckedArr] = useState(
-    Array.from({ length: userQuery.data?.length }, () => false)
-  );
-  const [deleteArr, setDeleteArr] = useState(
-    Array.from({ length: userQuery.data?.length }, () => false)
-  );
-
-  useEffect(() => {
-    if (checkedArr.length < 1) setAllChecked(false);
-    else if (checkedArr.indexOf(false) === -1) setAllChecked(true);
-    else setAllChecked(false);
-  }, [checkedArr]);
-
-  const setCheckedArrByIndex = (index: any) => {
-    const tmpArr = [...checkedArr];
-    tmpArr[index] = !checkedArr[index];
-    setCheckedArr(tmpArr);
-  };
-
-  const setDeleteArrByIndex = (index: any) => {
-    const tmpArr = Array.from({ length: userQuery.data?.length }, () => false);
-    tmpArr[index] = true;
-    setDeleteArr(tmpArr);
-  };
 
   const generateStatus = (status: string) => {
     switch (status) {
@@ -68,16 +58,11 @@ const LogBox = () => {
     }
     return status;
   };
-  const countChecked = () => {
-    return checkedArr.filter((element) => element === true).length;
-  };
+  // const countChecked = () => {
+  //   return checkedArr.filter((element) => element === true).length;
+  // };
 
   const onSubmit = () => {
-    // userQuery.data? = userQuery.data?.filter(
-    //   (element: any, index: any) => deleteArr[index] === false
-    // );
-    setCheckedArr(Array.from({ length: userQuery.data?.length }, () => false));
-    setDeleteArr(Array.from({ length: userQuery.data?.length }, () => false));
     setModalText("");
     setShowModal(false);
   };
@@ -87,17 +72,6 @@ const LogBox = () => {
     setShowModal(false);
   };
 
-  const onMultiDiscard = (e: any) => {
-    e.preventDefault();
-    const checkedLength = countChecked();
-    setModalText(`총 ${checkedLength}개의 보관품을
-	  처리를 합니다.
-	  반드시 냉장고에서
-	  꺼낸 후에 완료해주세요!
-	  `);
-    setDeleteArr(checkedArr);
-    setShowModal(true);
-  };
   // TODO: 관리자 인트리아이디 쇼 옵션
   return (
     <>
@@ -108,51 +82,63 @@ const LogBox = () => {
             <S.ListItemColumn style={{ width: "60px" }}>
               식별자
             </S.ListItemColumn>
-            <S.ListItemColumn style={{ width: "60px" }}>
-              유효기간
+            <S.ListItemColumn style={{ width: "60px" }}>시간</S.ListItemColumn>
+            <S.ListItemColumn style={{ width: "100px" }}>
+              intra
             </S.ListItemColumn>
-            <S.ListItemColumn style={{ width: "100px" }}>설명</S.ListItemColumn>
             <S.ListItemColumn style={{ width: "55px" }}>상태</S.ListItemColumn>
           </S.ListItemContainer>
-          {userQuery.data?.length > 0 ? (
+          {userQuery.data?.itemHistoryList.length > 0 ? (
             <S.ListRows>
-              {userQuery.data?.map((element: any, index: number) => {
-                return (
-                  <S.ListItemContainer
-                    style={{ margin: "5px auto" }}
-                    key={element.keepIdentifier}
-                  >
-                    <S.ListItemColumn style={{ width: "10px" }} />
-                    <S.ListItemColumn style={{ width: "60px" }}>
-                      {element.keepIdentifier}
-                    </S.ListItemColumn>
-                    <S.ListItemColumn style={{ width: "60px" }}>
-                      {element.keepExpiryDate}
-                    </S.ListItemColumn>
-                    <S.ListItemColumn style={{ width: "100px" }}>
-                      {element.description}
-                    </S.ListItemColumn>
-                    <S.ListItemColumn style={{ width: "55px" }}>
-                      {generateStatus(element.keepStatus)}
-                      {/* {generateButton(element, index)} */}
-                    </S.ListItemColumn>
-                  </S.ListItemContainer>
-                );
-              })}
+              {userQuery.data?.itemHistoryList.map(
+                (element: any, index: number) => {
+                  return (
+                    <S.ListItemContainer
+                      style={{ margin: "5px auto" }}
+                      key={`${page}page${element.keepIdentifier}${element.keepStatus}${element.recordedDate}`}
+                    >
+                      <S.ListItemColumn style={{ width: "10px" }} />
+                      <S.ListItemColumn style={{ width: "60px" }}>
+                        {element.keepIdentifier}
+                      </S.ListItemColumn>
+                      <S.ListItemColumn style={{ width: "60px" }}>
+                        {element.recordedDate.slice(11, 16)}
+                      </S.ListItemColumn>
+                      <S.ListItemColumn style={{ width: "100px" }}>
+                        {element.username !== null
+                          ? element.username
+                          : "관리자용"}
+                      </S.ListItemColumn>
+                      <S.ListItemColumn style={{ width: "55px" }}>
+                        {generateStatus(element.keepStatus)}
+                        {/* {generateButton(element, index)} */}
+                      </S.ListItemColumn>
+                    </S.ListItemContainer>
+                  );
+                }
+              )}
             </S.ListRows>
           ) : (
             <h1>앗 아무고토 없어요!!</h1>
           )}
         </S.ListContainer>
-        <S.ListFormButtonContianer>
-          <S.ListFormButton
-            onClick={onMultiDiscard}
-            disabled={countChecked() < 1}
-            tabIndex={-1}
-          >
-            선택 처리
-          </S.ListFormButton>
-        </S.ListFormButtonContianer>
+        <S.PageButtonContainer>
+          {totalpage.map((ele, i) => {
+            return (
+              <S.PageButton
+                key={i}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setPage(i);
+                }}
+                disabled={!ele}
+                style={{ background: page === i ? "#478eff" : "" }}
+              >
+                {i + 1}
+              </S.PageButton>
+            );
+          })}
+        </S.PageButtonContainer>
       </S.ListBoxForm>
       {showModal && (
         <Modal

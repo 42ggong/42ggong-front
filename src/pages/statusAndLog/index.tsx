@@ -9,8 +9,12 @@ const StatusAndLog = () => {
   return (
     <S.StatusAndLogPage>
       <S.InformContainer>
-        안내메세지입니다 냉장고 현황 및 기록
+        <h2>냉장고 현황과 기록</h2>
+        <span>현재 냉장고에 보관된 물품들</span>
+        <span>보관 찾음 폐기의</span>
+        <span>기록들을 볼 수 있어요!</span>
       </S.InformContainer>
+      <S.Line />
       <S.MenuButtonContainer>
         <S.MenuButton
           onClick={() => {

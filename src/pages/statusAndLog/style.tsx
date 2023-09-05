@@ -12,7 +12,7 @@ margin 0 auto;
 
 // inform
 export const InformContainer = styled.div`
-  border: solid;
+  // border: solid;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -23,6 +23,13 @@ export const InformContainer = styled.div`
   justify-content: center;
   margin: 0 auto;
   overflow: auto;
+`;
+
+export const Line = styled.hr`
+  width: 85%;
+  max-width: 600px;
+
+  border: 1.5px solid #478eff;
 `;
 
 // menuButton
@@ -163,6 +170,29 @@ export const DiscardButton = styled.button`
   &:hover {
     background-color: #ff478a;
   }
+`;
+
+export const PageButtonContainer = styled.div`
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const PageButton = styled.button`
+  border: none;
+  height: 20px;
+  width: 19%;
+  margin-right: 1%;
+  border-radius: 20px;
+  background: #6c5cff;
+  :disabled {
+    background: #c6c3eb;
+  }
+  // &:hover {
+  //   background-color: #478eff;
+  // }
 `;
 
 export const ListFormButtonContianer = styled.div`

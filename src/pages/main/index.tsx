@@ -77,7 +77,8 @@ const Main = () => {
               handleClick("status");
             }}
           >
-            냉장고 현황 및 기록{" "}
+            <div>냉장고 현황</div>
+            <div>및 기록 </div>
           </S.RoutButton>
         </S.ButtonRow>
       </S.RoutButtonContainer>
